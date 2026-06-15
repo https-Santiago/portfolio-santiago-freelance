@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 17px; }
+
+body {
+  background: #02050d;
+  color: #e8f0ff;
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #02050d; }
+::-webkit-scrollbar-thumb { background: #c8ff00; border-radius: 2px; }
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: white;
+  animation: twinkle var(--duration, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: var(--min-op, 0.2); }
+  50% { opacity: var(--max-op, 0.8); }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 20%, #7eb8ff 60%, #c8ff00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.accent-text {
+  background: linear-gradient(90deg, #c8ff00, #a8d600);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glow-card {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.glow-card:hover {
+  box-shadow: 0 0 30px rgba(200,255,0,0.15);
+  border-color: rgba(200,255,0,0.4) !important;
+}
+
+.play-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.pack-visual:hover .play-overlay {
+  opacity: 1;
+}
+
+.modal-backdrop {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.shooting-star {
+  position: absolute;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(180,210,255,0.5) 40%, transparent 100%);
+  transform-origin: left center;
+  animation: shootingStar var(--dur, 12s) var(--delay, 0s) linear infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Shimmer animado en nombre del pack */
+.pack-name-shimmer {
+  animation: packShimmer 3s ease-in-out infinite;
+}
+@keyframes packShimmer {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 0px transparent); }
+  50%       { filter: brightness(1.35) drop-shadow(0 0 10px currentColor); }
+}
+
+/* Borde pulsante del card de contacto */
+.contact-card {
+  animation: borderPulse 3.5s ease-in-out infinite;
+}
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(200,255,0,0.18); box-shadow: 0 0 0 0 rgba(200,255,0,0); }
+  50%       { border-color: rgba(200,255,0,0.45); box-shadow: 0 0 30px rgba(200,255,0,0.07); }
+}
+
+/* Partículas flotantes en Contact */
+@keyframes floatParticle {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { transform: translateY(-280px) scale(0.2); opacity: 0; }
+}
+
+@keyframes shootingStar {
+  0% {
+    transform: rotate(-32deg) translateX(0);
+    opacity: 0;
+  }
+  1% { opacity: 1; }
+  18% {
+    transform: rotate(-32deg) translateX(-130vw);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(-32deg) translateX(-130vw);
+    opacity: 0;
+  }
+}
