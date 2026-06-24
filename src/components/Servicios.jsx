@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SocialLinks from './SocialLinks'
 
 const WA_LINK = `https://wa.me/5493464692656?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre el servicio de edición de video.')}`
 
@@ -346,6 +347,11 @@ export default function Servicios() {
                     </svg>
                     HABLEMOS POR WHATSAPP
                   </a>
+
+                  <div className="mt-4 flex items-center justify-center gap-3">
+                    <span className="font-mono text-[11px]" style={{ color: '#8a8a8a' }}>También en redes</span>
+                    <SocialLinks iconClassName="w-9 h-9" />
+                  </div>
                 </div>
               </div>
             </div>

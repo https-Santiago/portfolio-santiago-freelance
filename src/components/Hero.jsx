@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import SocialLinks from './SocialLinks'
 
 const WA_LINK = `https://wa.me/5493464692656?text=${encodeURIComponent('Hola Santiago! Vi tu portfolio y quiero consultarte sobre edición de video.')}`
 
@@ -101,6 +102,10 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+
+        <motion.div {...fadeUp(0.5)} className="mt-7">
+          <SocialLinks className="justify-center" />
+        </motion.div>
       </div>
 
       {/* ═══════ CAPA 1: FOTO (desktop ≥ lg) ═══════ */}
@@ -187,6 +192,8 @@ export default function Hero() {
               </div>
             ))}
           </motion.div>
+
+          <SocialLinks />
         </div>
       </motion.div>
 
