@@ -1,12 +1,23 @@
+import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 const isLocal = (url) => /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url)
 
 export default function VideoModal({ videoUrl, titulo, isOpen, onClose }) {
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen, onClose])
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label={titulo ? `Video: ${titulo}` : 'Video'}
           className="fixed inset-0 z-[100] flex items-center justify-center modal-backdrop"
           style={{ background: 'rgba(0,0,0,0.7)' }}
           initial={{ opacity: 0 }}
@@ -27,6 +38,7 @@ export default function VideoModal({ videoUrl, titulo, isOpen, onClose }) {
             {/* Botón cerrar */}
             <button
               onClick={onClose}
+              aria-label="Cerrar video"
               className="absolute -top-3 -right-3 z-10 w-7 h-7 rounded-full bg-base-ink flex items-center justify-center shadow-sm"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1e1e1e" strokeWidth="2.5" strokeLinecap="round">

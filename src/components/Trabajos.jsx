@@ -54,15 +54,19 @@ export default function Trabajos() {
             <motion.div
               key={proyecto.id}
               {...fadeUp(0.1 + i * 0.08)}
-              className="group rounded-lg overflow-hidden cursor-pointer border border-[#3a3a3a] hover:border-accent transition-colors duration-200 flex flex-col"
+              role="button"
+              tabIndex={0}
+              aria-label={`Ver ${proyecto.tipo}: ${proyecto.desc}`}
+              className="group rounded-lg overflow-hidden cursor-pointer border border-[#3a3a3a] hover:border-accent focus:border-accent focus:outline-none transition-colors duration-200 flex flex-col"
               style={{ aspectRatio: '9/16' }}
               onClick={() => setModalProyecto(proyecto)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setModalProyecto(proyecto) } }}
             >
               {/* Área principal con poster del clip estilo frame Premiere */}
               <div className="flex-1 relative bg-[#2a2a2a] flex items-center justify-center overflow-hidden">
                 <img
                   src={proyecto.poster}
-                  alt={proyecto.titulo}
+                  alt={`${proyecto.tipo} — ${proyecto.desc}, editado por Santiago Ferlatti`}
                   loading="lazy"
                   referrerPolicy="no-referrer"
                   onError={(e) => { e.currentTarget.style.display = 'none' }}

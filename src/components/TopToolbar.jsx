@@ -39,11 +39,12 @@ export default function TopToolbar() {
       className="fixed top-0 left-0 right-0 z-50 h-10 flex items-center justify-between px-4"
       style={{ background: '#2a2a2a', borderBottom: '1px solid #3a3a3a' }}
     >
-      {/* Herramientas izquierda */}
-      <div className="flex items-center gap-3">
+      {/* Herramientas izquierda (decorativas, estética Premiere) */}
+      <div className="flex items-center gap-3" aria-hidden="true">
         {TOOLS.map((icon) => (
           <button
             key={icon.key}
+            tabIndex={-1}
             className="flex items-center justify-center rounded transition-colors duration-150"
             style={{ width: 28, height: 28, color: '#8a8a8a' }}
             onMouseEnter={e => e.currentTarget.style.background = '#3a3a3a'}

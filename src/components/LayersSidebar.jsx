@@ -131,7 +131,11 @@ export default function LayersSidebar() {
           return (
             <li
               key={id}
+              role="button"
+              tabIndex={0}
+              aria-label={`Ir a la sección ${name.replace('.psd', '')}`}
               onClick={() => scrollTo(id)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollTo(id) } }}
               className="flex items-center gap-2 px-2 py-1.5 cursor-pointer transition-colors duration-100"
               style={{
                 background: isActive ? 'rgba(124,58,237,0.25)' : 'transparent',
