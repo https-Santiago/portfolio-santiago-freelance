@@ -4,18 +4,21 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        orbitron: ['Orbitron', 'monospace'],
-        syne: ['Syne', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       },
       colors: {
         accent: {
-          DEFAULT: '#c8ff00',
-          dark: '#a8d600',
+          DEFAULT: '#7c3aed',
+          light: '#a78bfa',
+          dark: '#5b21b6',
         },
         base: {
-          DEFAULT: '#0a0a0a',
-          light: '#1a1a1a',
-          border: '#2a2a2a',
+          DEFAULT: '#1e1e1e',
+          soft: '#1a1a1a',
+          border: '#3a3a3a',
+          ink: '#f0f0f0',
+          muted: '#9a9a9a',
         },
       },
     },

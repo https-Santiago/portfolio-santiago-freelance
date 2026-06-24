@@ -1,92 +1,65 @@
-import { motion, useInView, AnimatePresence } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { useLanguage } from '../context/LanguageContext'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
-const FAQS = {
-  es: [
-    {
-      q: '¿En cuánto tiempo recibo mi video editado?',
-      a: 'El tiempo de entrega depende de la cantidad de videos que pidas. Coordino los tiempos con vos una vez que arrancamos para que siempre tengas contenido listo cuando lo necesitás.',
-    },
-    {
-      q: '¿Cuántas correcciones están incluidas?',
-      a: 'El plan Básico incluye 1 corrección sin cargo adicional. Los planes Estándar, Avanzado y Premium incluyen hasta 2 correcciones. Si algo no te convence del resultado, lo ajusto.',
-    },
-    {
-      q: '¿En qué formato me entregás los videos?',
-      a: 'En MP4 optimizado para redes sociales (formato vertical 9:16 para Reels y TikTok, o el formato que necesites). Listos para subir directamente.',
-    },
-    {
-      q: '¿Cómo te mando el material?',
-      a: 'Una vez que arrancamos, me compartís el link de tu Google Drive con los videos crudos. No necesitás editar nada. Mientras más material me mandés, más opciones tengo para armar el mejor resultado.',
-    },
-    {
-      q: '¿El plan Premium incluye todo lo del plan Avanzado?',
-      a: 'Sí. El plan Premium es el plan Avanzado completo más una mini reunión previa para definir el enfoque y un guion estructurado para que grabes con claridad y propósito.',
-    },
-    {
-      q: '¿Trabajás solo con creadores o también con marcas/empresas?',
-      a: 'Con ambos. Edito para creadores de contenido, emprendedores, marcas personales y empresas que quieren comunicar mejor en redes sociales.',
-    },
-  ],
-  en: [
-    {
-      q: 'How long until I receive my edited video?',
-      a: 'Delivery time depends on the number of videos you order. I coordinate timing with you once we start so you always have content ready when you need it.',
-    },
-    {
-      q: 'How many revisions are included?',
-      a: "The Basic plan includes 1 free revision. Standard, Advanced and Premium plans include up to 2 revisions. If you're not happy with the result, I'll adjust it.",
-    },
-    {
-      q: 'In what format are the videos delivered?',
-      a: 'In MP4 optimized for social media (vertical 9:16 format for Reels and TikTok, or whatever format you need). Ready to upload directly.',
-    },
-    {
-      q: 'How do I send you my material?',
-      a: "Once we start, you share the link to your Google Drive with your raw videos. You don't need to edit anything. The more material you send me, the more options I have to create the best result.",
-    },
-    {
-      q: 'Does the Premium plan include everything from the Advanced plan?',
-      a: 'Yes. The Premium plan is the complete Advanced plan plus a brief pre-edit meeting to define the approach and a structured script so you record with clarity and purpose.',
-    },
-    {
-      q: 'Do you work only with creators or also with brands/companies?',
-      a: 'Both. I edit for content creators, entrepreneurs, personal brands and companies that want to communicate better on social media.',
-    },
-  ],
-}
+const WA_LINK = `https://wa.me/5493464692656?text=${encodeURIComponent('Hola Santiago! Tengo una duda sobre tu servicio de edición.')}`
 
-const T = {
-  es: { label: 'Dudas frecuentes', title: 'Preguntas frecuentes.' },
-  en: { label: 'Common questions', title: 'Frequently asked questions.' },
-}
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+})
 
-function FAQItem({ item, index, inView }) {
+const FAQS = [
+  {
+    q: '¿En cuánto tiempo recibo mi video editado?',
+    a: 'Normalmente entrego el mismo día o al día siguiente, según la cantidad de proyectos que tenga en ese momento. Coordinamos los tiempos al arrancar para que siempre tengas tu contenido cuando lo necesitás.',
+  },
+  {
+    q: '¿Cuántas revisiones están incluidas?',
+    a: 'Incluyo 2 rondas de revisión sin costo. Si algo no te cierra (un corte, el color, el ritmo), lo ajusto hasta que quede como lo imaginabas.',
+  },
+  {
+    q: '¿Qué incluye el precio?',
+    a: 'Edición completa: armado, corrección de color, mejora de audio, música y subtítulos, por $12.000 ARS por video. Extras como guion previo, motion graphics o multi-formato los charlamos aparte.',
+  },
+  {
+    q: '¿Cómo te mando el material?',
+    a: 'Me compartís un link de Google Drive (o WeTransfer) con los videos crudos. No necesitás editar ni preparar nada: mientras más material me mandes, más opciones tengo para armar el mejor resultado.',
+  },
+  {
+    q: '¿En qué formato me entregás los videos?',
+    a: 'En MP4 listo para subir: vertical 9:16 para Reels, TikTok y Shorts, o el formato que necesites (horizontal para YouTube, cuadrado, etc.).',
+  },
+  {
+    q: '¿Trabajás con creadores y también con marcas?',
+    a: 'Con ambos. Edito para creadores de contenido, emprendedores, marcas personales y empresas que quieren comunicar mejor en redes.',
+  },
+  {
+    q: '¿Cómo es el pago?',
+    a: 'Lo coordinamos por WhatsApp antes de empezar: normalmente una seña para reservar el trabajo y el resto a la entrega, por transferencia.',
+  },
+]
+
+function FAQItem({ item }) {
   const [open, setOpen] = useState(false)
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: 0.1 + index * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      className="border-b"
-      style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-    >
+    <div className="border-b border-base-border">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between py-5 text-left gap-4"
+        className="w-full flex items-center justify-between py-4 text-left gap-4"
       >
-        <span className="text-white/80 text-base font-medium leading-snug">{item.q}</span>
+        <span className="text-sm md:text-base font-medium leading-snug" style={{ color: '#f0f0f0' }}>{item.q}</span>
         <motion.span
           animate={{ rotate: open ? 45 : 0 }}
           transition={{ duration: 0.25 }}
-          className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
-          style={{ border: '1px solid rgba(200,255,0,0.3)', color: '#c8ff00' }}
+          className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-accent"
+          style={{ border: '1px solid rgba(167,139,250,0.4)' }}
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <line x1="6" y1="1" x2="6" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            <line x1="1" y1="6" x2="11" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            <line x1="6" y1="1" x2="6" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <line x1="1" y1="6" x2="11" y2="6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </motion.span>
       </button>
@@ -101,60 +74,63 @@ function FAQItem({ item, index, inView }) {
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <p className="text-white/45 text-sm leading-relaxed pb-5 pr-10">{item.a}</p>
+            <p className="text-base-muted text-sm leading-relaxed pb-4 pr-8">{item.a}</p>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   )
 }
 
 export default function FAQ() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
-  const { lang } = useLanguage()
-  const t = T[lang]
-  const faqs = FAQS[lang]
-
   return (
-    <section id="faq" className="relative py-24 px-6">
-      <div className="max-w-3xl mx-auto" ref={ref}>
+    <section id="faq" className="relative bg-base-soft overflow-hidden py-20 px-6">
+      {/* Grilla decorativa */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          opacity: 0.04,
+          backgroundImage:
+            'linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
+      <div className="relative z-10 max-w-2xl mx-auto w-full">
 
-        {/* Header */}
-        <div className="mb-12">
-          <motion.p
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="text-[#c8ff00] text-sm tracking-[4px] uppercase mb-3 font-medium"
-          >
-            {t.label}
-          </motion.p>
-          <div style={{ overflow: 'hidden' }}>
-            <motion.h2
-              className="font-orbitron font-black text-4xl md:text-5xl text-white"
-              initial={{ y: '110%' }}
-              animate={inView ? { y: 0 } : {}}
-              transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {t.title}
-            </motion.h2>
-          </div>
-          <motion.div
-            className="mt-5 h-px origin-left"
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1, delay: 0.35 }}
-            style={{ background: 'linear-gradient(to right, #c8ff00, rgba(200,255,0,0.3), transparent)', maxWidth: '220px' }}
-          />
-        </div>
+        <motion.h2
+          {...fadeUp(0)}
+          className="font-bold text-3xl md:text-4xl text-base-ink text-center"
+        >
+          Preguntas frecuentes
+        </motion.h2>
+        <motion.p
+          {...fadeUp(0.1)}
+          className="text-base-muted text-sm text-center mt-3 mb-10"
+        >
+          Todo lo que necesitás saber antes de arrancar.
+        </motion.p>
 
-        {/* Items */}
         <div>
-          {faqs.map((item, i) => (
-            <FAQItem key={i} item={item} index={i} inView={inView} />
+          {FAQS.map((item, i) => (
+            <FAQItem key={i} item={item} index={i} />
           ))}
         </div>
+
+        <motion.p
+          {...fadeUp(0.2)}
+          className="text-center text-sm text-base-muted mt-8"
+        >
+          ¿Tenés otra duda?{' '}
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-accent font-medium hover:underline"
+          >
+            Escribime por WhatsApp
+          </a>
+          .
+        </motion.p>
 
       </div>
     </section>

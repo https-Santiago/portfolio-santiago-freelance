@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { openSafe } from '../utils/openSafe'
 
-const WA_URL = 'https://wa.me/5493464680592?text=' + encodeURIComponent('Hola! Vi su página y me interesa saber más sobre los packs de edición de video. ¿Me pueden dar información?')
+const WA_URL = 'https://wa.me/5493464692656?text=' + encodeURIComponent('Hola Santiago! Vi tu portfolio y quiero consultarte sobre edición de video.')
 
 export default function FloatingWhatsApp() {
   return (

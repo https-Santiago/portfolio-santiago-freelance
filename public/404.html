@@ -3,15 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 — Página no encontrada | Artemis Agency</title>
+  <title>404 — Página no encontrada | Santiago Ferlatti</title>
   <meta name="robots" content="noindex" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Space+Grotesk:wght@400;500&display=swap');
     body {
-      background: #02050d;
-      color: #e8f0ff;
-      font-family: 'Space Grotesk', sans-serif;
+      background: #1e1e1e;
+      color: #e5e5e5;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -19,112 +18,81 @@
       text-align: center;
       overflow: hidden;
     }
-    .stars {
+    .grid {
       position: fixed;
       inset: 0;
       pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(#e5e5e5 1px, transparent 1px),
+        linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+      background-size: 40px 40px;
     }
-    .star {
-      position: absolute;
-      border-radius: 50%;
-      background: white;
-      animation: twinkle 3s ease-in-out infinite;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.15; }
-      50% { opacity: 0.7; }
-    }
-    .container {
-      position: relative;
-      z-index: 10;
-      padding: 2rem;
-    }
+    .container { position: relative; z-index: 10; padding: 2rem; }
     .code {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
+      font-weight: 700;
       font-size: clamp(5rem, 20vw, 10rem);
       line-height: 1;
-      background: linear-gradient(135deg, #ffffff 20%, #7eb8ff 60%, #ff6b00 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #a78bfa;
       margin-bottom: 1rem;
     }
     .title {
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 900;
-      font-size: clamp(1rem, 3vw, 1.6rem);
-      color: white;
+      font-weight: 600;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      color: #ffffff;
       margin-bottom: 1rem;
       letter-spacing: 0.05em;
     }
     .desc {
       color: rgba(255,255,255,0.4);
-      font-size: 1rem;
+      font-size: 0.95rem;
       max-width: 360px;
       margin: 0 auto 2.5rem;
       line-height: 1.6;
     }
     .btn {
       display: inline-block;
-      background: #ff6b00;
+      background: #7c3aed;
       color: white;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 600;
+      font-weight: 500;
       padding: 0.9rem 2.2rem;
-      border-radius: 0.6rem;
+      border: 1px solid #a78bfa;
+      border-radius: 0.4rem;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       letter-spacing: 0.05em;
       transition: background 0.2s;
     }
-    .btn:hover { background: #ff9d4d; }
-    .orbit {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,107,0,0.15);
+    .btn:hover { background: #6d28d9; }
+    .clip {
+      width: 200px;
+      height: 26px;
       margin: 0 auto 2rem;
+      border-radius: 4px;
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
       position: relative;
-      animation: spin 20s linear infinite;
+      overflow: hidden;
     }
-    .orbit::after {
-      content: '';
+    .clip::before {
+      content: 'sin_señal.mp4';
       position: absolute;
-      top: -4px;
-      left: 50%;
-      width: 8px;
-      height: 8px;
-      background: #ff6b00;
-      border-radius: 50%;
-      transform: translateX(-50%);
-      opacity: 0.7;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #8a8a8a;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
   </style>
 </head>
 <body>
-
-  <!-- Stars -->
-  <div class="stars" id="stars"></div>
-
+  <div class="grid"></div>
   <div class="container">
-    <div class="orbit"></div>
+    <div class="clip"></div>
     <div class="code">404</div>
     <p class="title">Página no encontrada</p>
-    <p class="desc">Parece que esta ruta se perdió en el espacio. Volvé a la base de control.</p>
+    <p class="desc">Este clip no existe en la línea de tiempo. Volvé al inicio.</p>
     <a href="/" class="btn">Volver al inicio</a>
   </div>
-
-  <script>
-    const container = document.getElementById('stars')
-    for (let i = 0; i < 80; i++) {
-      const s = document.createElement('div')
-      s.className = 'star'
-      const size = Math.random() * 2 + 1
-      s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-delay:${Math.random()*4}s;animation-duration:${2+Math.random()*3}s`
-      container.appendChild(s)
-    }
-  </script>
 </body>
 </html>

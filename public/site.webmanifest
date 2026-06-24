@@ -1,11 +1,11 @@
 {
-  "name": "Artemis Agency",
-  "short_name": "Artemis",
-  "description": "Edición de video profesional para creadores y marcas",
+  "name": "Santiago Ferlatti · Editor de Video",
+  "short_name": "Santiago",
+  "description": "Portafolio de Santiago Ferlatti, editor de video freelance. Reels, color, audio y motion graphics.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#02050d",
-  "theme_color": "#ff6b00",
+  "background_color": "#1e1e1e",
+  "theme_color": "#7c3aed",
   "icons": [
     { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
