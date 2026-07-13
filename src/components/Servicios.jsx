@@ -144,11 +144,11 @@ function EdicionCard() {
             </p>
             <div className="flex items-baseline gap-2 leading-none">
               <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>
-                $12.000
+                $20
               </span>
-              <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>ARS</span>
+              <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>USD</span>
             </div>
-            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>≈ USD $9</p>
+            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>≈ $30.000 ARS</p>
           </div>
 
           {/* Incluye */}

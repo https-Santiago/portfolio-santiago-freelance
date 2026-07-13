@@ -4,3 +4,7 @@ dist
 .netlify
 .env
 .env.local
+
+# Videos crudos sin comprimir, no van al repo (pesan demasiado para GitHub)
+Videos Frelance/
+foto-perfil/

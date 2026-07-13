@@ -21,7 +21,7 @@ const FAQS = [
   },
   {
     q: '¿Qué incluye el precio?',
-    a: 'Edición completa: armado, corrección de color, mejora de audio, música y subtítulos, por $12.000 ARS por video. Extras como guion previo, motion graphics o multi-formato los charlamos aparte.',
+    a: 'Edición completa: armado, corrección de color, mejora de audio, música y subtítulos, por $20 USD (≈ $30.000 ARS) por video. Extras como guion previo, motion graphics o multi-formato los charlamos aparte.',
   },
   {
     q: '¿Cómo te mando el material?',

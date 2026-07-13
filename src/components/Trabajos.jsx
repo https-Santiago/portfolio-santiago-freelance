@@ -3,12 +3,12 @@ import { motion } from 'framer-motion'
 import VideoModal from './VideoModal'
 
 const PROYECTOS = [
-  { id: 1, titulo: 'reel-01.mp4', tipo: 'Reel para redes', desc: 'Corte dinámico, color y subtítulos', duracion: '00:48', videoUrl: '/reels/reel-01.mp4', poster: '/reels/posters/reel-01.jpg' },
-  { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido para creador', desc: 'Ritmo musical y mejora de audio', duracion: '00:36', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
-  { id: 3, titulo: 'reel-03.mp4', tipo: 'Video promocional', desc: 'Color cinematográfico y transiciones', duracion: '00:30', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg' },
-  { id: 4, titulo: 'reel-04.mp4', tipo: 'Reel para redes', desc: 'Storytelling con subtítulos y música', duracion: '00:55', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg' },
-  { id: 5, titulo: 'reel-05.mp4', tipo: 'Contenido para marca', desc: 'Cortes al ritmo, color y subtítulos', duracion: '00:32', videoUrl: '/reels/reel-05.mp4', poster: '/reels/posters/reel-05.jpg' },
-  { id: 6, titulo: 'reel-06.mp4', tipo: 'Reel para redes', desc: 'Cortes precisos, color y sonido', duracion: '00:46', videoUrl: '/reels/reel-06.mp4', poster: '/reels/posters/reel-06.jpg' },
+  { id: 1, titulo: 'reel-01.mp4', tipo: 'Contenido educativo', desc: 'Talking head con motion graphics y subtítulos', duracion: '01:18', videoUrl: '/reels/reel-01.mp4', poster: '/reels/posters/reel-01.jpg' },
+  { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido educativo', desc: 'Storytelling con ritmo y refuerzo visual', duracion: '00:46', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
+  { id: 3, titulo: 'reel-03.mp4', tipo: 'Contenido educativo', desc: 'Edición dinámica con cortes al ritmo del guion', duracion: '01:12', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg' },
+  { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Cortes ágiles, color y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg' },
+  { id: 5, titulo: 'reel-05.mp4', tipo: 'Contenido educativo', desc: 'Talking head con gráficos de apoyo', duracion: '00:51', videoUrl: '/reels/reel-05.mp4', poster: '/reels/posters/reel-05.jpg' },
+  { id: 6, titulo: 'reel-06.mp4', tipo: 'Contenido educativo', desc: 'Talking head con motion graphics y subtítulos', duracion: '01:11', videoUrl: '/reels/reel-06.mp4', poster: '/reels/posters/reel-06.jpg' },
 ]
 
 const fadeUp = (delay = 0) => ({
