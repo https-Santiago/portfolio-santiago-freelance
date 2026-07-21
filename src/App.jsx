@@ -1,20 +1,24 @@
 import Hero from './components/Hero'
 import Trabajos from './components/Trabajos'
+import Testimonios from './components/Testimonios'
 import Servicios from './components/Servicios'
 import FAQ from './components/FAQ'
 import FloatingWhatsApp from './components/FloatingWhatsApp'
 import LayersSidebar from './components/LayersSidebar'
 import TopToolbar from './components/TopToolbar'
+import Navbar from './components/Navbar'
 import StatusBar from './components/StatusBar'
 
 export default function App() {
   return (
     <div className="relative min-h-screen">
       <TopToolbar />
+      <Navbar />
       <LayersSidebar />
-      <div className="pt-10 pb-7">
+      <div className="pt-[104px] md:pt-10 pb-7">
         <Hero />
         <Trabajos />
+        <Testimonios />
         <Servicios />
         <FAQ />
       </div>

@@ -3,12 +3,12 @@ import { motion } from 'framer-motion'
 import VideoModal from './VideoModal'
 
 const PROYECTOS = [
-  { id: 1, titulo: 'reel-01.mp4', tipo: 'Contenido educativo', desc: 'Talking head con motion graphics y subtítulos', duracion: '01:18', videoUrl: '/reels/reel-01.mp4', poster: '/reels/posters/reel-01.jpg' },
-  { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido educativo', desc: 'Storytelling con ritmo y refuerzo visual', duracion: '00:46', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
-  { id: 3, titulo: 'reel-03.mp4', tipo: 'Contenido educativo', desc: 'Edición dinámica con cortes al ritmo del guion', duracion: '01:12', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg' },
-  { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Cortes ágiles, color y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg' },
-  { id: 5, titulo: 'reel-05.mp4', tipo: 'Contenido educativo', desc: 'Talking head con gráficos de apoyo', duracion: '00:51', videoUrl: '/reels/reel-05.mp4', poster: '/reels/posters/reel-05.jpg' },
-  { id: 6, titulo: 'reel-06.mp4', tipo: 'Contenido educativo', desc: 'Talking head con motion graphics y subtítulos', duracion: '01:11', videoUrl: '/reels/reel-06.mp4', poster: '/reels/posters/reel-06.jpg' },
+  { id: 1, titulo: 'reel-01.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre criptomonedas y trading, con motion graphics y subtítulos', duracion: '01:18', videoUrl: '/reels/reel-01.mp4', poster: '/reels/posters/reel-01.jpg' },
+  { id: 2, titulo: 'reel-02.mp4', tipo: 'Call con alumnos', desc: 'Fragmento de call de formación para setters, con cortes y subtítulos', duracion: '00:46', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
+  { id: 3, titulo: 'reel-03.mp4', tipo: 'Reel promocional', desc: 'Resultados de una promo con avalancha de pedidos, motion graphics y texto animado', duracion: '00:37', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg' },
+  { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Talking head sobre appointment setting, cortes ágiles y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg' },
+  { id: 5, titulo: 'reel-05.mp4', tipo: 'Contenido para creador', desc: 'Talking head personal con edición dinámica y subtítulos', duracion: '01:30', videoUrl: '/reels/reel-05.mp4', poster: '/reels/posters/reel-05.jpg', cliente: { nombre: 'Yulene Galera Trillas', instagram: 'https://www.instagram.com/yulenegaleratrillas' } },
+  { id: 6, titulo: 'reel-06.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre ingresos y appointment setting, con motion graphics', duracion: '01:11', videoUrl: '/reels/reel-06.mp4', poster: '/reels/posters/reel-06.jpg' },
 ]
 
 const fadeUp = (delay = 0) => ({
@@ -74,21 +74,11 @@ export default function Trabajos() {
                 />
                 <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
 
-                {/* Etiqueta tipo */}
-                <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded bg-black/55 backdrop-blur-sm">
-                  <span className="font-mono text-[10px] text-accent">{proyecto.tipo}</span>
-                </div>
-
                 {/* Play */}
                 <div className="relative w-12 h-12 rounded-full bg-black/45 group-hover:bg-accent flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
                   <svg width="16" height="16" viewBox="0 0 14 14" fill="white">
                     <path d="M3 2l9 5-9 5V2z" />
                   </svg>
-                </div>
-
-                {/* Descripción al hover */}
-                <div className="absolute inset-x-0 bottom-0 z-10 p-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <p className="text-[11px] text-white/90 leading-snug">{proyecto.desc}</p>
                 </div>
               </div>
 

@@ -7,8 +7,8 @@ const TEAM_BASE = [
 ]
 
 const STATS = [
-  { es: '+3 años',        en: '+3 years',     desc_es: 'de experiencia',   desc_en: 'of experience'    },
-  { es: '+50 proyectos',  en: '+50 projects',  desc_es: 'entregados',       desc_en: 'delivered'        },
+  { es: '+20 clientes',   en: '+20 clients',   desc_es: 'en 6 meses',       desc_en: 'in 6 months'      },
+  { es: '-24hs',          en: '-24h',          desc_es: 'tiempo de respuesta', desc_en: 'response time' },
   { es: '100% remoto',    en: '100% remote',   desc_es: 'disponibilidad',   desc_en: 'availability'     },
 ]
 

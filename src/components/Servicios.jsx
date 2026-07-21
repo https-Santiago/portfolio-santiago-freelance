@@ -140,7 +140,7 @@ function EdicionCard() {
           {/* Precio */}
           <div className="min-w-0">
             <p className="font-mono tracking-widest mb-1.5" style={{ fontSize: 10, color: '#b0b0b0' }}>
-              PRECIO POR VIDEO
+              PRECIO · VIDEO DE ~1 MIN
             </p>
             <div className="flex items-baseline gap-2 leading-none">
               <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>

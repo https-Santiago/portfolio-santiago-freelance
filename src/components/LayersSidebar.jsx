@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 
 const LAYERS = [
-  { id: 'hero',      name: 'Hero.psd' },
-  { id: 'trabajos',  name: 'Trabajos.psd' },
-  { id: 'servicios', name: 'Servicios.psd' },
-  { id: 'faq',       name: 'FAQ.psd' },
+  { id: 'hero',        name: 'Hero.psd' },
+  { id: 'trabajos',    name: 'Trabajos.psd' },
+  { id: 'testimonios', name: 'Testimonios.psd' },
+  { id: 'servicios',   name: 'Servicios.psd' },
+  { id: 'faq',         name: 'FAQ.psd' },
 ]
 
 // Nota: "contacto" vive dentro de la sección Servicios (mismo bloque).

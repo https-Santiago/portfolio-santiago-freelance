@@ -41,9 +41,9 @@ const T = {
         desc: 'El tiempo de entrega varía según la cantidad de videos. Si algo no te convence, lo ajustamos.',
       },
     ],
-    footer: 'Tiempo de entrega: varía según cantidad de videos · Correcciones: 1 en Pack Orbit · 2 en el resto',
+    footer: 'Tiempo de entrega: varía según cantidad de videos · Correcciones: 2 rondas incluidas sin costo',
     footerHighlight1: 'varía según cantidad de videos',
-    footerHighlight2: '1 en Pack Orbit · 2 en el resto',
+    footerHighlight2: '2 rondas incluidas sin costo',
   },
   en: {
     label: 'The process',
@@ -62,9 +62,9 @@ const T = {
         desc: "Delivery time varies by number of videos. If you're not satisfied with the result, we'll adjust it.",
       },
     ],
-    footer: 'Delivery time: varies by number of videos · Revisions: 1 in Pack Orbit · 2 in the rest',
+    footer: 'Delivery time: varies by number of videos · Revisions: 2 rounds included at no cost',
     footerHighlight1: 'varies by number of videos',
-    footerHighlight2: '1 in Pack Orbit · 2 in the rest',
+    footerHighlight2: '2 rounds included at no cost',
   },
 }
 
@@ -164,8 +164,8 @@ export default function HowItWorks() {
         >
           <p className="text-white/30 text-sm">
             {lang === 'es'
-              ? <>Tiempo de entrega: <span className="text-white/60">varía según cantidad de videos</span> · Correcciones: <span className="text-white/60">1 en Pack Orbit · 2 en el resto</span></>
-              : <>Delivery time: <span className="text-white/60">varies by number of videos</span> · Revisions: <span className="text-white/60">1 in Pack Orbit · 2 in the rest</span></>
+              ? <>Tiempo de entrega: <span className="text-white/60">varía según cantidad de videos</span> · Correcciones: <span className="text-white/60">2 rondas incluidas sin costo</span></>
+              : <>Delivery time: <span className="text-white/60">varies by number of videos</span> · Revisions: <span className="text-white/60">2 rounds included at no cost</span></>
             }
           </p>
         </motion.div>
