@@ -97,8 +97,9 @@ export default function Testimonios() {
             <motion.div
               key={nombre}
               {...fadeUp(0.08 + i * 0.07)}
+              whileHover={{ y: -5, boxShadow: '0 14px 32px rgba(0,0,0,0.6)', transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
               className="rounded-lg overflow-hidden flex flex-col"
-              style={{ border: '1px solid #3a3a3a' }}
+              style={{ border: '1px solid #3a3a3a', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
             >
               {/* Header — cada card es su propia "ventana" de chat */}
               <div

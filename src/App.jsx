@@ -1,6 +1,8 @@
 import Hero from './components/Hero'
 import Trabajos from './components/Trabajos'
 import Testimonios from './components/Testimonios'
+import Clientes from './components/Clientes'
+import SectionDivider from './components/SectionDivider'
 import Servicios from './components/Servicios'
 import FAQ from './components/FAQ'
 import FloatingWhatsApp from './components/FloatingWhatsApp'
@@ -19,6 +21,8 @@ export default function App() {
         <Hero />
         <Trabajos />
         <Testimonios />
+        <SectionDivider />
+        <Clientes />
         <Servicios />
         <FAQ />
       </div>
