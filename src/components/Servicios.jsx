@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import SocialLinks from './SocialLinks'
 
-const WA_LINK = `https://wa.me/5493464692656?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre el servicio de edición de video.')}`
+const WA_NUMBER = '5493464692656'
+const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre el servicio de edición de video.')}`
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -238,6 +240,52 @@ function EdicionCard() {
   )
 }
 
+function ContactoForm() {
+  const [nombre, setNombre] = useState('')
+  const [mensaje, setMensaje] = useState('')
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    const texto = `Hola Santiago! Soy ${nombre}. ${mensaje}`
+    const link = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(texto)}`
+    window.open(link, '_blank', 'noopener,noreferrer')
+    window.location.href = '/gracias/'
+  }
+
+  const inputClass = 'w-full bg-[#141414] text-white font-mono text-sm px-3 py-2.5 rounded outline-none border border-[#3a3a3a] focus:border-accent transition-colors duration-200 placeholder:text-[#6a6a6a]'
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3 mb-4">
+      <input
+        type="text"
+        required
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
+        placeholder="Tu nombre"
+        className={inputClass}
+      />
+      <textarea
+        required
+        value={mensaje}
+        onChange={(e) => setMensaje(e.target.value)}
+        placeholder="Contame en una línea qué necesitás"
+        rows={2}
+        className={`${inputClass} resize-none`}
+      />
+      <button
+        type="submit"
+        className="w-full bg-accent hover:bg-accent-dark text-white font-mono font-medium text-sm flex items-center justify-center gap-2 py-4 tracking-wide transition-colors duration-200"
+        style={{ borderRadius: 3, border: '1px solid #a78bfa' }}
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+          <path d="M3 2l9 5-9 5V2z" />
+        </svg>
+        ENVIAR POR WHATSAPP
+      </button>
+    </form>
+  )
+}
+
 export default function Servicios() {
   return (
     <section id="servicios" className="relative min-h-screen flex flex-col items-center justify-center bg-base-soft overflow-hidden py-20 px-6">
@@ -335,18 +383,7 @@ export default function Servicios() {
                 </div>
 
                 <div className="mt-auto pt-6" style={{ borderTop: '1px solid #3a3a3a' }}>
-                  <a
-                    href={WA_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-accent hover:bg-accent-dark text-white font-mono font-medium text-sm flex items-center justify-center gap-2 py-4 tracking-wide transition-colors duration-200"
-                    style={{ borderRadius: 3, border: '1px solid #a78bfa' }}
-                  >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-                      <path d="M3 2l9 5-9 5V2z" />
-                    </svg>
-                    HABLEMOS POR WHATSAPP
-                  </a>
+                  <ContactoForm />
 
                   <div className="mt-4 flex items-center justify-center gap-3">
                     <span className="font-mono text-[11px]" style={{ color: '#8a8a8a' }}>También en redes</span>

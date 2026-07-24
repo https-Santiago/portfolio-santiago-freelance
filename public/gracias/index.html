@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Gracias! | Santiago Ferlatti</title>
+  <meta name="robots" content="noindex" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1e1e1e;
+      color: #e5e5e5;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(#e5e5e5 1px, transparent 1px),
+        linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .container { position: relative; z-index: 10; padding: 2rem; }
+    .check {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      background: rgba(124,58,237,0.12);
+      border: 1px solid #a78bfa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .title {
+      font-weight: 700;
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      color: #ffffff;
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .desc {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.95rem;
+      max-width: 380px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-block;
+      background: #7c3aed;
+      color: white;
+      font-weight: 500;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid #a78bfa;
+      border-radius: 0.4rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #6d28d9; }
+    .clip {
+      width: 220px;
+      height: 26px;
+      margin: 0 auto 2rem;
+      border-radius: 4px;
+      background: #2a2a2a;
+      border: 1px solid #3a3a3a;
+      position: relative;
+      overflow: hidden;
+    }
+    .clip::before {
+      content: 'mensaje_enviado.mp4';
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #8a8a8a;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="container">
+    <div class="clip"></div>
+    <div class="check">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12" />
+      </svg>
+    </div>
+    <p class="title">¡Listo!</p>
+    <p class="desc">Ya te abrí WhatsApp con tu mensaje. En cuanto lo confirmes del otro lado, te respondo a la brevedad.</p>
+    <a href="/" class="btn">Volver al inicio</a>
+  </div>
+</body>
+</html>
