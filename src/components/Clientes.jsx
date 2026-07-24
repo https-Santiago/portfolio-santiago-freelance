@@ -3,25 +3,35 @@ import { motion } from 'framer-motion'
 const CLIENTES = [
   {
     id: 1,
+    plataforma: 'instagram',
     handle: 'karly.baptista',
     subtitulo: 'K A R L Y  |  Nutrición | Mentalidad',
     categoria: 'Sports & Fitness Instruction',
-    stats: { publicaciones: '690', seguidores: '7061', siguiendo: '1300' },
+    stats: [
+      { valor: '690', label: 'publicaciones' },
+      { valor: '7061', label: 'seguidores' },
+      { valor: '1300', label: 'seguidos' },
+    ],
     bio: [
       '🚩Ayudo a mujeres +40 a que se les caigan los patalones en 21 días',
       '💚+300 mujeres transformaron su metabolismo',
       'Empezá aquí ⬇️',
     ],
     link: 'metabolicresetcoach.com',
-    instagramUrl: 'https://www.instagram.com/karly.baptista',
+    url: 'https://www.instagram.com/karly.baptista',
     foto: '/clientes/karly.png',
   },
   {
     id: 2,
+    plataforma: 'instagram',
     handle: 'yulenegaleratrillas',
     subtitulo: 'Yulene Galera',
     categoria: 'Motivational speaker',
-    stats: { publicaciones: '785', seguidores: '121 mil', siguiendo: '2432' },
+    stats: [
+      { valor: '785', label: 'publicaciones' },
+      { valor: '121 mil', label: 'seguidores' },
+      { valor: '2432', label: 'seguidos' },
+    ],
     bio: [
       'Te guío a encontrar la fuerza de tu voz y así cambiar tu vida',
       '🔥Co-founder @storytellher.mx',
@@ -29,15 +39,20 @@ const CLIENTES = [
       '🎤Speaker Motivacional',
     ],
     link: 'linktr.ee/thewildflowersmx',
-    instagramUrl: 'https://www.instagram.com/yulenegaleratrillas',
+    url: 'https://www.instagram.com/yulenegaleratrillas',
     foto: '/clientes/yulene.png',
   },
   {
     id: 3,
+    plataforma: 'instagram',
     handle: 'seba.spinassi',
     subtitulo: 'Sebastian Spinassi',
     categoria: 'Entrepreneur',
-    stats: { publicaciones: '7', seguidores: '34,1 mil', siguiendo: '891' },
+    stats: [
+      { valor: '7', label: 'publicaciones' },
+      { valor: '34,1 mil', label: 'seguidores' },
+      { valor: '891', label: 'seguidos' },
+    ],
     bio: [
       '📌MAYORISTA DE PERFUMES',
       '@Lurux.perfumes (+22mil Seg.) ❌👈 Cuenta Bajada',
@@ -45,8 +60,27 @@ const CLIENTES = [
       '📲Mira la info y Unite al Grupo 👇',
     ],
     link: 'luruxperfumes.com',
-    instagramUrl: 'https://www.instagram.com/seba.spinassi',
+    url: 'https://www.instagram.com/seba.spinassi',
     foto: '/clientes/sebastian.png',
+  },
+  {
+    id: 4,
+    plataforma: 'youtube',
+    handle: 'FlourishwithLaurin',
+    subtitulo: 'Flourish with Laurin',
+    categoria: 'Relationship & Life Coach',
+    stats: [
+      { valor: '531 mil', label: 'suscriptores' },
+      { valor: '1 mil', label: 'videos' },
+    ],
+    bio: [
+      '🔥 Raw Truth. Real Growth. No Apologies.',
+      '🎥 Contenido semanal sobre relaciones y crecimiento personal',
+      'Mirá los videos completos ⬇️',
+    ],
+    link: 'bio.site/FlourishwithLaurin',
+    url: 'https://www.youtube.com/@FlourishwithLaurin/videos',
+    foto: '/clientes/laurin.png',
   },
 ]
 
@@ -66,14 +100,26 @@ function VerifiedBadge() {
   )
 }
 
+function YoutubeBadge() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#ff0000" className="flex-shrink-0">
+      <path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4.1-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2 9 2 10.7v1.6c0 1.7.2 3.5.2 3.5s.2 1.5.8 2.2c.8.8 1.9.8 2.3.9C6.9 19 12 19 12 19s3.9 0 6.7-.1c.4-.1 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5z" />
+      <path d="M9.8 14.3V8.7l5.4 2.8-5.4 2.8z" fill="#1e1e1e" />
+    </svg>
+  )
+}
+
 function ClienteCard({ cliente, i }) {
+  const esYoutube = cliente.plataforma === 'youtube'
+  const nombrePlataforma = esYoutube ? 'YouTube' : 'Instagram'
+
   return (
     <motion.a
       {...fadeUp(0.1 + i * 0.1)}
-      href={cliente.instagramUrl}
+      href={cliente.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Ver perfil de Instagram de ${cliente.handle}`}
+      aria-label={`Ver perfil de ${nombrePlataforma} de ${cliente.handle}`}
       whileHover={{ y: -5, boxShadow: '0 14px 32px rgba(0,0,0,0.6)', transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
       style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
       className="group rounded-lg overflow-hidden border border-[#3a3a3a] hover:border-accent focus:border-accent focus:outline-none transition-colors duration-200 flex flex-col"
@@ -95,14 +141,14 @@ function ClienteCard({ cliente, i }) {
         <div className="flex items-start gap-4 mb-4">
           <img
             src={cliente.foto}
-            alt={`Foto de perfil de Instagram de ${cliente.handle}`}
+            alt={`Foto de perfil de ${nombrePlataforma} de ${cliente.handle}`}
             loading="lazy"
             className="w-16 h-16 rounded-full object-cover flex-shrink-0"
           />
           <div className="min-w-0 pt-1">
             <div className="flex items-center gap-1.5">
               <span className="font-bold text-white text-base truncate">{cliente.handle}</span>
-              <VerifiedBadge />
+              {esYoutube ? <YoutubeBadge /> : <VerifiedBadge />}
             </div>
             <p className="text-white/70 text-xs mt-1 leading-snug">{cliente.subtitulo}</p>
           </div>
@@ -110,9 +156,9 @@ function ClienteCard({ cliente, i }) {
 
         {/* Stats */}
         <div className="flex items-center gap-4 mb-3 font-mono" style={{ fontSize: 11 }}>
-          <span className="text-white"><b>{cliente.stats.publicaciones}</b> <span style={{ color: '#8a8a8a' }}>publicaciones</span></span>
-          <span className="text-white"><b>{cliente.stats.seguidores}</b> <span style={{ color: '#8a8a8a' }}>seguidores</span></span>
-          <span className="text-white"><b>{cliente.stats.siguiendo}</b> <span style={{ color: '#8a8a8a' }}>seguidos</span></span>
+          {cliente.stats.map((stat, idx) => (
+            <span key={idx} className="text-white"><b>{stat.valor}</b> <span style={{ color: '#8a8a8a' }}>{stat.label}</span></span>
+          ))}
         </div>
 
         {/* Categoria */}
