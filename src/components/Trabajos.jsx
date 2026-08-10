@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import VideoModal from './VideoModal'
+import { useScrollEntrance, scrollVariantFor } from '../hooks/useScrollEntrance'
+import { useScrollBlur } from '../hooks/useScrollBlur'
+import { usePointerFine } from '../hooks/usePointerFine'
+import { useParallax } from '../hooks/useParallax'
 
 const PROYECTOS = [
   { id: 1, titulo: 'reel-01.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre criptomonedas y trading, con motion graphics y subtítulos', duracion: '01:18', videoUrl: '/reels/reel-01.mp4', poster: '/reels/posters/reel-01.jpg' },
-  { id: 2, titulo: 'reel-02.mp4', tipo: 'Call con alumnos', desc: 'Fragmento de call de formación para setters, con cortes y subtítulos', duracion: '00:46', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
+  { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre cómo planificar 30 días de contenido, con motion graphics y calendario animado', duracion: '01:24', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
   { id: 3, titulo: 'reel-03.mp4', tipo: 'Reel promocional', desc: 'Resultados de una promo con avalancha de pedidos, motion graphics y texto animado', duracion: '00:37', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg' },
   { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Talking head sobre appointment setting, cortes ágiles y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg' },
   { id: 5, titulo: 'reel-05.mp4', tipo: 'Contenido para creador', desc: 'Talking head personal con edición dinámica y subtítulos', duracion: '01:30', videoUrl: '/reels/reel-05.mp4', poster: '/reels/posters/reel-05.jpg', cliente: { nombre: 'Yulene Galera Trillas', instagram: 'https://www.instagram.com/yulenegaleratrillas' } },
@@ -15,33 +19,90 @@ const YOUTUBE_VIDEOS = [
   { id: 1, titulo: 'She Doesn’t Want Equality. She Wants You To Lead.', canal: 'Flourish with Laurin', videoId: 'zwbJnXpkRHs', videoUrl: 'https://www.youtube.com/embed/zwbJnXpkRHs?autoplay=1', poster: 'https://i.ytimg.com/vi/zwbJnXpkRHs/hqdefault.jpg', externalUrl: 'https://www.youtube.com/watch?v=zwbJnXpkRHs' },
 ]
 
+const EASE = [0.16, 1, 0.3, 1]
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.6, delay, ease: EASE },
 })
 
-function YoutubeCard({ video, i, onPlay }) {
+function ProyectoCard({ proyecto, i, blurFilter, onOpen }) {
+  const ref = useRef(null)
+  const entrada = useScrollEntrance(ref, scrollVariantFor(i))
+  const posterY = useParallax(ref, 14)
+
   return (
     <motion.div
-      {...fadeUp(0.1 + i * 0.1)}
+      ref={ref}
+      style={{ ...entrada, filter: blurFilter, aspectRatio: '9/16' }}
+      role="button"
+      tabIndex={0}
+      aria-label={`Ver ${proyecto.tipo}: ${proyecto.desc}`}
+      className="group rounded-lg overflow-hidden cursor-pointer border border-[#3a3a3a] hover:border-accent focus:border-accent focus:outline-none transition-colors duration-200 flex flex-col"
+      onClick={() => onOpen(proyecto)}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(proyecto) } }}
+    >
+      {/* Área principal con poster del clip estilo frame Premiere */}
+      <div className="flex-1 relative bg-[#2a2a2a] flex items-center justify-center overflow-hidden">
+        {/* Wrapper con buffer de 20px arriba/abajo para que el parallax nunca deje ver un borde */}
+        <motion.div className="absolute -top-5 -bottom-5 left-0 right-0" style={{ y: posterY }}>
+          <img
+            src={proyecto.poster}
+            alt={`${proyecto.tipo} — ${proyecto.desc}, editado por Santiago Ferlatti`}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            onError={(e) => { e.currentTarget.style.display = 'none' }}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
+
+        {/* Play */}
+        <div className="relative w-12 h-12 rounded-full bg-black/45 group-hover:bg-accent flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
+          <svg width="16" height="16" viewBox="0 0 14 14" fill="white">
+            <path d="M3 2l9 5-9 5V2z" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Barra inferior estilo Premiere */}
+      <div className="bg-[#1e1e1e] py-2 px-3 flex items-center justify-between flex-shrink-0">
+        <span className="font-mono text-xs text-white">{proyecto.titulo}</span>
+        <span className="font-mono text-xs" style={{ color: '#8a8a8a' }}>{proyecto.duracion || '▶'}</span>
+      </div>
+    </motion.div>
+  )
+}
+
+function YoutubeCard({ video, i, blurFilter, onPlay }) {
+  const ref = useRef(null)
+  const entrada = useScrollEntrance(ref, scrollVariantFor(i))
+  const posterY = useParallax(ref, 14)
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ ...entrada, filter: blurFilter, aspectRatio: '16/9' }}
       role="button"
       tabIndex={0}
       aria-label={`Reproducir video de YouTube: ${video.titulo}`}
       className="group rounded-lg overflow-hidden cursor-pointer border border-[#3a2323] hover:border-[#ff3b3b] focus:border-[#ff3b3b] focus:outline-none transition-colors duration-200 flex flex-col"
-      style={{ aspectRatio: '16/9' }}
       onClick={() => onPlay(video)}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPlay(video) } }}
     >
       <div className="flex-1 relative bg-[#2a2a2a] overflow-hidden">
-        <img
-          src={video.poster}
-          alt={`Miniatura de "${video.titulo}", editado por Santiago Ferlatti`}
-          loading="lazy"
-          referrerPolicy="no-referrer"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+        {/* Wrapper con buffer de 20px arriba/abajo para que el parallax nunca deje ver un borde */}
+        <motion.div className="absolute -top-5 -bottom-5 left-0 right-0" style={{ y: posterY }}>
+          <img
+            src={video.poster}
+            alt={`Miniatura de "${video.titulo}", editado por Santiago Ferlatti`}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
 
         {/* Play (rojo, look YouTube) */}
@@ -91,6 +152,10 @@ function YoutubeCard({ video, i, onPlay }) {
 
 export default function Trabajos() {
   const [modalProyecto, setModalProyecto] = useState(null)
+  const pointerFine = usePointerFine()
+  // Un solo listener de scroll para toda la sección — el blur se le pasa
+  // a cada card ya calculado, en vez de que cada una lo recalcule.
+  const blurFilter = useScrollBlur({ enabled: pointerFine })
 
   return (
     <section id="trabajos" className="relative min-h-screen flex flex-col items-center justify-center bg-base-soft overflow-hidden py-20 px-6">
@@ -122,43 +187,7 @@ export default function Trabajos() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROYECTOS.map((proyecto, i) => (
-            <motion.div
-              key={proyecto.id}
-              {...fadeUp(0.1 + i * 0.08)}
-              role="button"
-              tabIndex={0}
-              aria-label={`Ver ${proyecto.tipo}: ${proyecto.desc}`}
-              className="group rounded-lg overflow-hidden cursor-pointer border border-[#3a3a3a] hover:border-accent focus:border-accent focus:outline-none transition-colors duration-200 flex flex-col"
-              style={{ aspectRatio: '9/16' }}
-              onClick={() => setModalProyecto(proyecto)}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setModalProyecto(proyecto) } }}
-            >
-              {/* Área principal con poster del clip estilo frame Premiere */}
-              <div className="flex-1 relative bg-[#2a2a2a] flex items-center justify-center overflow-hidden">
-                <img
-                  src={proyecto.poster}
-                  alt={`${proyecto.tipo} — ${proyecto.desc}, editado por Santiago Ferlatti`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer"
-                  onError={(e) => { e.currentTarget.style.display = 'none' }}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
-
-                {/* Play */}
-                <div className="relative w-12 h-12 rounded-full bg-black/45 group-hover:bg-accent flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
-                  <svg width="16" height="16" viewBox="0 0 14 14" fill="white">
-                    <path d="M3 2l9 5-9 5V2z" />
-                  </svg>
-                </div>
-              </div>
-
-              {/* Barra inferior estilo Premiere */}
-              <div className="bg-[#1e1e1e] py-2 px-3 flex items-center justify-between flex-shrink-0">
-                <span className="font-mono text-xs text-white">{proyecto.titulo}</span>
-                <span className="font-mono text-xs" style={{ color: '#8a8a8a' }}>{proyecto.duracion || '▶'}</span>
-              </div>
-            </motion.div>
+            <ProyectoCard key={proyecto.id} proyecto={proyecto} i={i} blurFilter={blurFilter} onOpen={setModalProyecto} />
           ))}
         </div>
 
@@ -173,7 +202,7 @@ export default function Trabajos() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {YOUTUBE_VIDEOS.map((video, i) => (
-                <YoutubeCard key={video.id} video={video} i={i} onPlay={setModalProyecto} />
+                <YoutubeCard key={video.id} video={video} i={i} blurFilter={blurFilter} onPlay={setModalProyecto} />
               ))}
             </div>
           </div>

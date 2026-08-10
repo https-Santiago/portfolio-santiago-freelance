@@ -4,6 +4,7 @@ import SocialLinks from './SocialLinks'
 
 const WA_NUMBER = '5493464692656'
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre el servicio de edición de video.')}`
+const WA_LINK_LARGO = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre edición de un video largo (YouTube).')}`
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -67,6 +68,21 @@ function WavePattern() {
         strokeWidth="1.5"
       />
     </svg>
+  )
+}
+
+function YoutubeBadge() {
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded font-mono font-bold flex-shrink-0"
+      style={{ fontSize: 9, background: '#ff0000', color: '#fff' }}
+    >
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="white">
+        <path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4.1-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2 9 2 10.7v1.6c0 1.7.2 3.5.2 3.5s.2 1.5.8 2.2c.8.8 1.9.8 2.3.9C6.9 19 12 19 12 19s3.9 0 6.7-.1c.4-.1 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5z" />
+        <path d="M9.8 14.3V8.7l5.4 2.8-5.4 2.8z" fill="#ff0000" />
+      </svg>
+      YouTube
+    </span>
   )
 }
 
@@ -240,6 +256,140 @@ function EdicionCard() {
   )
 }
 
+function EdicionLargaCard() {
+  return (
+    <div
+      className="w-full rounded-lg overflow-hidden"
+      style={{ border: '1px solid #3a2323' }}
+    >
+      {/* Header ventana */}
+      <div
+        className="px-4 py-2 flex items-center justify-between"
+        style={{ background: '#2a2a2a' }}
+      >
+        <span className="font-mono text-xs text-white">Video largo</span>
+        <YoutubeBadge />
+      </div>
+
+      {/* Body */}
+      <div className="p-4" style={{ background: '#1e1e1e' }}>
+
+        {/* Monitor de preview */}
+        <div
+          className="rounded p-4 mb-3.5 flex items-start justify-between gap-2"
+          style={{ background: '#4a4a4a', border: '1px solid #5a5a5a' }}
+        >
+          {/* Precio */}
+          <div className="min-w-0">
+            <p className="font-mono tracking-widest mb-1.5" style={{ fontSize: 10, color: '#b0b0b0' }}>
+              PRECIO · POR MINUTO
+            </p>
+            <div className="flex items-baseline gap-2 leading-none">
+              <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>
+                $10
+              </span>
+              <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>USD/min</span>
+            </div>
+            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>Ej: video de 30 min ≈ $300 USD</p>
+          </div>
+
+          {/* Incluye */}
+          <div className="text-right flex-shrink-0">
+            <p className="font-mono tracking-widest mb-1.5" style={{ fontSize: 9, color: '#8a8a8a' }}>
+              INCLUYE
+            </p>
+            <p className="font-mono leading-relaxed" style={{ fontSize: 10, color: '#b0b0b0' }}>
+              Video + color<br />
+              Audio + música<br />
+              Subtítulos
+            </p>
+          </div>
+        </div>
+
+        {/* Regla de tiempo */}
+        <div
+          className="flex mb-1.5"
+          style={{ paddingLeft: 34, borderBottom: '1px solid #3a3a3a', paddingBottom: 4, marginBottom: 6 }}
+        >
+          {['00:00', '07:30', '15:00', '22:30', '30:00'].map((t) => (
+            <span key={t} className="flex-1 font-mono" style={{ fontSize: 9, color: '#8a8a8a' }}>
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {/* Pistas */}
+        <div className="flex flex-col" style={{ gap: 3 }}>
+          {/* V3 */}
+          <Track label="V3">
+            <Clip left="15%" width="30%" bg="#7C3AED" border="#AFA9EC" textColor="#EEEDFE" label="subtitulos" />
+            <Clip left="60%" width="25%" bg="#7C3AED" border="#AFA9EC" textColor="#EEEDFE" label="subtitulos" />
+          </Track>
+
+          {/* V2 */}
+          <Track label="V2">
+            <Clip left="5%" width="90%" bg="#534AB7" border="#7F77DD" textColor="#EEEDFE" label="correccion_color" />
+          </Track>
+
+          {/* V1 */}
+          <Track label="V1">
+            <Clip left="0" width="30%" bg="#378ADD" border="#85B7EB" textColor="#E6F1FB" label="capitulo_1.mp4" />
+            <div
+              className="absolute top-0 bottom-0 flex items-center justify-center"
+              style={{ left: '30%', width: '3%' }}
+            >
+              <BowTieIcon />
+            </div>
+            <Clip left="33%" width="32%" bg="#378ADD" border="#85B7EB" textColor="#E6F1FB" label="capitulo_2.mp4" />
+            <div
+              className="absolute top-0 bottom-0 flex items-center justify-center"
+              style={{ left: '65%', width: '3%' }}
+            >
+              <BowTieIcon />
+            </div>
+            <Clip left="68%" width="32%" bg="#378ADD" border="#85B7EB" textColor="#E6F1FB" label="capitulo_3.mp4" />
+          </Track>
+
+          {/* Separador video/audio */}
+          <div style={{ height: 6 }} />
+
+          {/* A1 */}
+          <Track label="A1">
+            <Clip left="0" width="96%" bg="#0F6E56" border="#1D9E75" textColor="#E1F5EE" label="audio_mejorado.wav" wave />
+          </Track>
+
+          {/* A2 */}
+          <Track label="A2">
+            <Clip left="8%" width="80%" bg="#0F6E56" border="#1D9E75" textColor="#E1F5EE" label="musica_fondo.mp3" wave />
+          </Track>
+        </div>
+
+        {/* CTA */}
+        <div
+          className="mt-3.5 pt-3.5"
+          style={{ borderTop: '1px solid #3a3a3a' }}
+        >
+          <a
+            href={WA_LINK_LARGO}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full text-white font-mono font-medium text-sm flex items-center justify-center gap-2 py-3 tracking-wide transition-colors duration-200"
+            style={{ borderRadius: 3, border: '1px solid #ff5c5c', background: '#ff0000' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = '#cc0000' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = '#ff0000' }}
+          >
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="currentColor">
+              <path d="M3 2l9 5-9 5V2z" />
+            </svg>
+            CONSULTAR POR WHATSAPP
+          </a>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
 function ContactoForm() {
   const [nombre, setNombre] = useState('')
   const [mensaje, setMensaje] = useState('')
@@ -331,10 +481,10 @@ export default function Servicios() {
           ))}
         </motion.div>
 
-        {/* ═══════ SERVICIO (precio) + CONTACTO lado a lado ═══════ */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        {/* ═══════ SERVICIO (precio) + VIDEO LARGO lado a lado ═══════ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-          {/* Precio / edición */}
+          {/* Precio / edición corta */}
           <motion.div {...fadeUp(0.25)} className="flex flex-col">
             <h3 className="font-bold text-xl md:text-2xl text-base-ink mb-1">
               El servicio
@@ -345,56 +495,67 @@ export default function Servicios() {
             <EdicionCard />
           </motion.div>
 
-          {/* Contacto */}
-          <motion.div
-            {...fadeUp(0.35)}
-            id="contacto"
-            className="scroll-mt-16 flex flex-col"
-          >
+          {/* Precio / video largo */}
+          <motion.div {...fadeUp(0.3)} className="flex flex-col">
             <h3 className="font-bold text-xl md:text-2xl text-base-ink mb-1">
-              ¿Hablamos?
+              Video largo
             </h3>
             <p className="text-base-muted text-sm mb-4">
-              Contame sobre tu proyecto y te respondo a la brevedad.
+              Para formato YouTube (charlas, podcasts, contenido largo).
             </p>
-
-            <div className="rounded-lg overflow-hidden" style={{ border: '1px solid #3a3a3a' }}>
-              {/* Header ventana */}
-              <div className="flex items-center justify-between px-4 py-2" style={{ background: '#2a2a2a' }}>
-                <span className="font-mono text-xs text-white">contacto.prproj</span>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
-                  <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
-                  <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
-                </div>
-              </div>
-
-              {/* Body */}
-              <div className="p-6 flex-1 flex flex-col" style={{ background: '#1e1e1e' }}>
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {METADATA.map(({ label, valor }) => (
-                    <div key={label}>
-                      <p className="font-mono tracking-widest mb-1" style={{ fontSize: 10, color: '#8a8a8a' }}>
-                        {label}
-                      </p>
-                      <p className="font-mono text-sm text-white leading-snug">{valor}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-auto pt-6" style={{ borderTop: '1px solid #3a3a3a' }}>
-                  <ContactoForm />
-
-                  <div className="mt-4 flex items-center justify-center gap-3">
-                    <span className="font-mono text-[11px]" style={{ color: '#8a8a8a' }}>También en redes</span>
-                    <SocialLinks iconClassName="w-9 h-9" />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <EdicionLargaCard />
           </motion.div>
 
         </div>
+
+        {/* ═══════ CONTACTO ═══════ */}
+        <motion.div
+          {...fadeUp(0.35)}
+          id="contacto"
+          className="scroll-mt-16 flex flex-col max-w-2xl mx-auto w-full"
+        >
+          <h3 className="font-bold text-xl md:text-2xl text-base-ink mb-1">
+            ¿Hablamos?
+          </h3>
+          <p className="text-base-muted text-sm mb-4">
+            Contame sobre tu proyecto y te respondo a la brevedad.
+          </p>
+
+          <div className="rounded-lg overflow-hidden" style={{ border: '1px solid #3a3a3a' }}>
+            {/* Header ventana */}
+            <div className="flex items-center justify-between px-4 py-2" style={{ background: '#2a2a2a' }}>
+              <span className="font-mono text-xs text-white">contacto.prproj</span>
+              <div className="flex items-center gap-1.5">
+                <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
+                <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
+                <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
+              </div>
+            </div>
+
+            {/* Body */}
+            <div className="p-6 flex-1 flex flex-col" style={{ background: '#1e1e1e' }}>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                {METADATA.map(({ label, valor }) => (
+                  <div key={label}>
+                    <p className="font-mono tracking-widest mb-1" style={{ fontSize: 10, color: '#8a8a8a' }}>
+                      {label}
+                    </p>
+                    <p className="font-mono text-sm text-white leading-snug">{valor}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-6" style={{ borderTop: '1px solid #3a3a3a' }}>
+                <ContactoForm />
+
+                <div className="mt-4 flex items-center justify-center gap-3">
+                  <span className="font-mono text-[11px]" style={{ color: '#8a8a8a' }}>También en redes</span>
+                  <SocialLinks iconClassName="w-9 h-9" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Nota extras */}
         <motion.p

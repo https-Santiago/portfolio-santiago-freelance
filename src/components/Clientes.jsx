@@ -1,4 +1,8 @@
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useScrollEntrance, scrollVariantFor } from '../hooks/useScrollEntrance'
+import { useScrollBlur } from '../hooks/useScrollBlur'
+import { usePointerFine } from '../hooks/usePointerFine'
 
 const CLIENTES = [
   {
@@ -84,11 +88,13 @@ const CLIENTES = [
   },
 ]
 
+const EASE = [0.16, 1, 0.3, 1]
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.6, delay, ease: EASE },
 })
 
 function VerifiedBadge() {
@@ -109,76 +115,84 @@ function YoutubeBadge() {
   )
 }
 
-function ClienteCard({ cliente, i }) {
+function ClienteCard({ cliente, i, blurFilter }) {
   const esYoutube = cliente.plataforma === 'youtube'
   const nombrePlataforma = esYoutube ? 'YouTube' : 'Instagram'
+  const ref = useRef(null)
+  const entrada = useScrollEntrance(ref, scrollVariantFor(i))
 
   return (
-    <motion.a
-      {...fadeUp(0.1 + i * 0.1)}
-      href={cliente.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Ver perfil de ${nombrePlataforma} de ${cliente.handle}`}
-      whileHover={{ y: -5, boxShadow: '0 14px 32px rgba(0,0,0,0.6)', transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
-      style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
-      className="group rounded-lg overflow-hidden border border-[#3a3a3a] hover:border-accent focus:border-accent focus:outline-none transition-colors duration-200 flex flex-col"
-    >
-      {/* Barra superior estilo ventana */}
-      <div className="bg-[#2a2a2a] px-3 py-2 flex items-center justify-between flex-shrink-0">
-        <span className="font-mono text-[10px] text-white truncate">@{cliente.handle}</span>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
-          <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
-          <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
-        </div>
-      </div>
-
-      {/* Body */}
-      <div className="bg-[#1e1e1e] p-5 flex-1 flex flex-col">
-
-        {/* Header: foto + nombre */}
-        <div className="flex items-start gap-4 mb-4">
-          <img
-            src={cliente.foto}
-            alt={`Foto de perfil de ${nombrePlataforma} de ${cliente.handle}`}
-            loading="lazy"
-            className="w-16 h-16 rounded-full object-cover flex-shrink-0"
-          />
-          <div className="min-w-0 pt-1">
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-white text-base truncate">{cliente.handle}</span>
-              {esYoutube ? <YoutubeBadge /> : <VerifiedBadge />}
-            </div>
-            <p className="text-white/70 text-xs mt-1 leading-snug">{cliente.subtitulo}</p>
+    // Wrapper externo: solo posición/entrada ligada al scroll (no interactivo)
+    <motion.div ref={ref} style={{ ...entrada, filter: blurFilter }}>
+      {/* Wrapper interno: hover propio, independiente del transform de scroll */}
+      <motion.a
+        href={cliente.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Ver perfil de ${nombrePlataforma} de ${cliente.handle}`}
+        whileHover={{ y: -5, boxShadow: '0 14px 32px rgba(0,0,0,0.6)', transition: { duration: 0.25, ease: EASE } }}
+        style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
+        className="group rounded-lg overflow-hidden border border-[#3a3a3a] hover:border-accent focus:border-accent focus:outline-none transition-colors duration-200 flex flex-col"
+      >
+        {/* Barra superior estilo ventana */}
+        <div className="bg-[#2a2a2a] px-3 py-2 flex items-center justify-between flex-shrink-0">
+          <span className="font-mono text-[10px] text-white truncate">@{cliente.handle}</span>
+          <div className="flex items-center gap-1.5 flex-shrink-0">
+            <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
+            <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
+            <div className="w-2 h-2 rounded-full" style={{ background: '#5f5e5a' }} />
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="flex items-center gap-4 mb-3 font-mono" style={{ fontSize: 11 }}>
-          {cliente.stats.map((stat, idx) => (
-            <span key={idx} className="text-white"><b>{stat.valor}</b> <span style={{ color: '#8a8a8a' }}>{stat.label}</span></span>
-          ))}
+        {/* Body */}
+        <div className="bg-[#1e1e1e] p-5 flex-1 flex flex-col">
+
+          {/* Header: foto + nombre */}
+          <div className="flex items-start gap-4 mb-4">
+            <img
+              src={cliente.foto}
+              alt={`Foto de perfil de ${nombrePlataforma} de ${cliente.handle}`}
+              loading="lazy"
+              className="w-16 h-16 rounded-full object-cover flex-shrink-0"
+            />
+            <div className="min-w-0 pt-1">
+              <div className="flex items-center gap-1.5">
+                <span className="font-bold text-white text-base truncate">{cliente.handle}</span>
+                {esYoutube ? <YoutubeBadge /> : <VerifiedBadge />}
+              </div>
+              <p className="text-white/70 text-xs mt-1 leading-snug">{cliente.subtitulo}</p>
+            </div>
+          </div>
+
+          {/* Stats */}
+          <div className="flex items-center gap-4 mb-3 font-mono" style={{ fontSize: 11 }}>
+            {cliente.stats.map((stat, idx) => (
+              <span key={idx} className="text-white"><b>{stat.valor}</b> <span style={{ color: '#8a8a8a' }}>{stat.label}</span></span>
+            ))}
+          </div>
+
+          {/* Categoria */}
+          <p className="font-mono text-[10px] tracking-wide mb-2" style={{ color: '#8a8a8a' }}>{cliente.categoria}</p>
+
+          {/* Bio */}
+          <div className="flex flex-col gap-0.5 mb-3">
+            {cliente.bio.map((linea, idx) => (
+              <p key={idx} className="text-white/85 text-xs leading-snug">{linea}</p>
+            ))}
+          </div>
+
+          {/* Link */}
+          <p className="text-accent-light text-xs mt-auto pt-2 truncate">🔗 {cliente.link}</p>
         </div>
-
-        {/* Categoria */}
-        <p className="font-mono text-[10px] tracking-wide mb-2" style={{ color: '#8a8a8a' }}>{cliente.categoria}</p>
-
-        {/* Bio */}
-        <div className="flex flex-col gap-0.5 mb-3">
-          {cliente.bio.map((linea, idx) => (
-            <p key={idx} className="text-white/85 text-xs leading-snug">{linea}</p>
-          ))}
-        </div>
-
-        {/* Link */}
-        <p className="text-accent-light text-xs mt-auto pt-2 truncate">🔗 {cliente.link}</p>
-      </div>
-    </motion.a>
+      </motion.a>
+    </motion.div>
   )
 }
 
 export default function Clientes() {
+  const pointerFine = usePointerFine()
+  const blurFilter = useScrollBlur({ enabled: pointerFine })
+
   return (
     <section id="clientes" className="relative py-20 px-6">
       <div className="relative z-10 max-w-5xl mx-auto w-full">
@@ -199,7 +213,7 @@ export default function Clientes() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {CLIENTES.map((cliente, i) => (
-            <ClienteCard key={cliente.id} cliente={cliente} i={i} />
+            <ClienteCard key={cliente.id} cliente={cliente} i={i} blurFilter={blurFilter} />
           ))}
         </div>
 

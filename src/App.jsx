@@ -1,3 +1,5 @@
+import ScrollPlayhead from './components/ScrollPlayhead'
+import GrainOverlay from './components/GrainOverlay'
 import Hero from './components/Hero'
 import Trabajos from './components/Trabajos'
 import Testimonios from './components/Testimonios'
@@ -14,6 +16,8 @@ import StatusBar from './components/StatusBar'
 export default function App() {
   return (
     <div className="relative min-h-screen">
+      <ScrollPlayhead />
+      <GrainOverlay />
       <TopToolbar />
       <Navbar />
       <LayersSidebar />

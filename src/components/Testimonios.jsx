@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import fotoSebastian from '../assets/testimonios/sebastian.jpg'
 import fotoRafael from '../assets/testimonios/rafael.jpg'
@@ -8,6 +9,9 @@ import capturaRafael from '../assets/testimonios/rafael-chat.jpg'
 import capturaFabrizio from '../assets/testimonios/fabrizio-chat.jpg'
 import capturaSebasStruck from '../assets/testimonios/sebasstruck-chat.jpg'
 import capturaKarly from '../assets/testimonios/karly-chat.jpg'
+import { useScrollEntrance, scrollVariantFor } from '../hooks/useScrollEntrance'
+import { useScrollBlur } from '../hooks/useScrollBlur'
+import { usePointerFine } from '../hooks/usePointerFine'
 
 /* Capturas reales de WhatsApp, publicadas con permiso de cada cliente. */
 const TESTIMONIOS = [
@@ -45,11 +49,13 @@ const TESTIMONIOS = [
 
 const AVATAR_COLORS = ['#c8ff00', '#7eb8ff', '#a78bfa', '#ff6b00', '#9FE1CB']
 
+const EASE = [0.16, 1, 0.3, 1]
+
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.6, delay, ease: EASE },
 })
 
 function WhatsAppIcon() {
@@ -80,7 +86,49 @@ function Avatar({ nombre, foto, color }) {
   )
 }
 
+function TestimonioCard({ item, i, blurFilter }) {
+  const { nombre, mensaje, foto, captura } = item
+  const ref = useRef(null)
+  const entrada = useScrollEntrance(ref, scrollVariantFor(i))
+
+  return (
+    // Wrapper externo: solo posición/entrada ligada al scroll (no interactivo)
+    <motion.div ref={ref} style={{ ...entrada, filter: blurFilter }}>
+      {/* Wrapper interno: hover propio, independiente del transform de scroll */}
+      <motion.div
+        whileHover={{ y: -5, boxShadow: '0 14px 32px rgba(0,0,0,0.6)', transition: { duration: 0.25, ease: EASE } }}
+        className="rounded-lg overflow-hidden flex flex-col"
+        style={{ border: '1px solid #3a3a3a', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
+      >
+        {/* Header — cada card es su propia "ventana" de chat */}
+        <div
+          className="px-3 py-2 flex items-center gap-2"
+          style={{ background: '#2a2a2a', borderBottom: '1px solid #3a3a3a' }}
+        >
+          <Avatar nombre={nombre} foto={foto} color={AVATAR_COLORS[i % AVATAR_COLORS.length]} />
+          <span className="font-mono text-xs text-white truncate flex-1">{nombre}</span>
+          <span style={{ color: '#3ea36b' }} aria-hidden="true">
+            <WhatsAppIcon />
+          </span>
+        </div>
+
+        {/* Body: captura real de WhatsApp */}
+        <div className="flex-1 flex items-center" style={{ background: '#1e1e1e' }}>
+          <img
+            src={captura}
+            alt={`Mensaje de ${nombre}: ${mensaje}`}
+            className="w-full h-auto block"
+          />
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 export default function Testimonios() {
+  const pointerFine = usePointerFine()
+  const blurFilter = useScrollBlur({ enabled: pointerFine })
+
   return (
     <section id="testimonios" className="relative py-20 px-6">
       <div className="max-w-5xl mx-auto w-full">
@@ -93,35 +141,8 @@ export default function Testimonios() {
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {TESTIMONIOS.map(({ nombre, mensaje, foto, captura }, i) => (
-            <motion.div
-              key={nombre}
-              {...fadeUp(0.08 + i * 0.07)}
-              whileHover={{ y: -5, boxShadow: '0 14px 32px rgba(0,0,0,0.6)', transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] } }}
-              className="rounded-lg overflow-hidden flex flex-col"
-              style={{ border: '1px solid #3a3a3a', boxShadow: '0 4px 20px rgba(0,0,0,0.5)' }}
-            >
-              {/* Header — cada card es su propia "ventana" de chat */}
-              <div
-                className="px-3 py-2 flex items-center gap-2"
-                style={{ background: '#2a2a2a', borderBottom: '1px solid #3a3a3a' }}
-              >
-                <Avatar nombre={nombre} foto={foto} color={AVATAR_COLORS[i % AVATAR_COLORS.length]} />
-                <span className="font-mono text-xs text-white truncate flex-1">{nombre}</span>
-                <span style={{ color: '#3ea36b' }} aria-hidden="true">
-                  <WhatsAppIcon />
-                </span>
-              </div>
-
-              {/* Body: captura real de WhatsApp */}
-              <div className="flex-1 flex items-center" style={{ background: '#1e1e1e' }}>
-                <img
-                  src={captura}
-                  alt={`Mensaje de ${nombre}: ${mensaje}`}
-                  className="w-full h-auto block"
-                />
-              </div>
-            </motion.div>
+          {TESTIMONIOS.map((item, i) => (
+            <TestimonioCard key={item.nombre} item={item} i={i} blurFilter={blurFilter} />
           ))}
         </div>
 
