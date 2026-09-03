@@ -16,7 +16,6 @@ const PROYECTOS = [
   { id: 10, titulo: 'reel-10.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre cómo conectar con clientes, con motion graphics y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-10.mp4', poster: '/reels/posters/reel-10.jpg', fecha: '2026-07-09' },
   { id: 11, titulo: 'reel-11.mp4', tipo: 'Contenido para creador', desc: 'Sketch actuado sobre atención al cliente, con motion graphics y subtítulos', duracion: '01:10', videoUrl: '/reels/reel-11.mp4', poster: '/reels/posters/reel-11.jpg', fecha: '2026-08-05' },
   { id: 12, titulo: 'reel-12.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre estructura de guion (hook y lead), con motion graphics y subtítulos', duracion: '00:40', videoUrl: '/reels/reel-12.mp4', poster: '/reels/posters/reel-12.jpg', fecha: '2026-08-15' },
-  { id: 13, titulo: 'reel-13.mp4', tipo: 'Talking head', desc: 'Talking head sobre crecimiento y organización, con motion graphics y subtítulos', duracion: '01:24', videoUrl: '/reels/reel-13.mp4', poster: '/reels/posters/reel-13.jpg', fecha: '2026-08-06' },
 ]
 
 const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
