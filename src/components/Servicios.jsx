@@ -162,11 +162,11 @@ function EdicionCard() {
             </p>
             <div className="flex items-baseline gap-2 leading-none">
               <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>
-                $20
+                $30
               </span>
               <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>USD</span>
             </div>
-            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>≈ $30.000 ARS</p>
+            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>≈ $46.000 ARS</p>
           </div>
 
           {/* Incluye */}
@@ -286,11 +286,11 @@ function EdicionLargaCard() {
             </p>
             <div className="flex items-baseline gap-2 leading-none">
               <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>
-                $10
+                $15
               </span>
               <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>USD/min</span>
             </div>
-            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>Ej: video de 30 min ≈ $300 USD</p>
+            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>Ej: video de 30 min ≈ $450 USD</p>
           </div>
 
           {/* Incluye */}
