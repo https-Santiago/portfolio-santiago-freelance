@@ -10,6 +10,13 @@ const PROYECTOS = [
   { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre cómo planificar 30 días de contenido, con motion graphics y calendario animado', duracion: '01:24', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg', fecha: '2026-08-09' },
   { id: 3, titulo: 'reel-03.mp4', tipo: 'Reel promocional', desc: 'Resultados de una promo con avalancha de pedidos, motion graphics y texto animado', duracion: '00:37', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg', fecha: '2026-07-20' },
   { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Talking head sobre appointment setting, cortes ágiles y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg', fecha: '2026-07-13' },
+  { id: 7, titulo: 'reel-07.mp4', tipo: 'Contenido para creador', desc: 'Talking head sobre reventa de mercadería, cortes dinámicos y subtítulos', duracion: '00:42', videoUrl: '/reels/reel-07.mp4', poster: '/reels/posters/reel-07.jpg', fecha: '2026-08-24' },
+  { id: 8, titulo: 'reel-08.mp4', tipo: 'Talking head', desc: 'Talking head sobre encontrar rumbo profesional, con motion graphics y subtítulos', duracion: '00:39', videoUrl: '/reels/reel-08.mp4', poster: '/reels/posters/reel-08.jpg', fecha: '2026-08-28' },
+  { id: 9, titulo: 'reel-09.mp4', tipo: 'Contenido educativo', desc: 'Contenido educativo sobre marketing y atención, con motion graphics y texto animado', duracion: '00:48', videoUrl: '/reels/reel-09.mp4', poster: '/reels/posters/reel-09.jpg', fecha: '2026-09-02' },
+  { id: 10, titulo: 'reel-10.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre cómo conectar con clientes, con motion graphics y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-10.mp4', poster: '/reels/posters/reel-10.jpg', fecha: '2026-07-09' },
+  { id: 11, titulo: 'reel-11.mp4', tipo: 'Contenido para creador', desc: 'Sketch actuado sobre atención al cliente, con motion graphics y subtítulos', duracion: '01:10', videoUrl: '/reels/reel-11.mp4', poster: '/reels/posters/reel-11.jpg', fecha: '2026-08-05' },
+  { id: 12, titulo: 'reel-12.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre estructura de guion (hook y lead), con motion graphics y subtítulos', duracion: '00:40', videoUrl: '/reels/reel-12.mp4', poster: '/reels/posters/reel-12.jpg', fecha: '2026-08-15' },
+  { id: 13, titulo: 'reel-13.mp4', tipo: 'Talking head', desc: 'Talking head sobre crecimiento y organización, con motion graphics y subtítulos', duracion: '01:24', videoUrl: '/reels/reel-13.mp4', poster: '/reels/posters/reel-13.jpg', fecha: '2026-08-06' },
 ]
 
 const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
@@ -170,7 +177,8 @@ function YoutubeCard({ video, i, blurFilter, onPlay }) {
 export default function Trabajos() {
   const [modalProyecto, setModalProyecto] = useState(null)
   const [mostrarTodos, setMostrarTodos] = useState(false)
-  const proyectosVisibles = mostrarTodos ? PROYECTOS : PROYECTOS.slice(0, 3)
+  const proyectosOrdenados = [...PROYECTOS].sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+  const proyectosVisibles = mostrarTodos ? proyectosOrdenados : proyectosOrdenados.slice(0, 3)
   const hayMas = PROYECTOS.length > 3
   const pointerFine = usePointerFine()
   // Un solo listener de scroll para toda la sección — el blur se le pasa
