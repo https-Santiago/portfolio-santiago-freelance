@@ -7,13 +7,23 @@ import { usePointerFine } from '../hooks/usePointerFine'
 import { useParallax } from '../hooks/useParallax'
 
 const PROYECTOS = [
-  { id: 1, titulo: 'reel-01.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre criptomonedas y trading, con motion graphics y subtítulos', duracion: '01:18', videoUrl: '/reels/reel-01.mp4', poster: '/reels/posters/reel-01.jpg' },
-  { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre cómo planificar 30 días de contenido, con motion graphics y calendario animado', duracion: '01:24', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg' },
-  { id: 3, titulo: 'reel-03.mp4', tipo: 'Reel promocional', desc: 'Resultados de una promo con avalancha de pedidos, motion graphics y texto animado', duracion: '00:37', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg' },
-  { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Talking head sobre appointment setting, cortes ágiles y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg' },
-  { id: 5, titulo: 'reel-05.mp4', tipo: 'Contenido para creador', desc: 'Talking head personal con edición dinámica y subtítulos', duracion: '01:30', videoUrl: '/reels/reel-05.mp4', poster: '/reels/posters/reel-05.jpg', cliente: { nombre: 'Yulene Galera Trillas', instagram: 'https://www.instagram.com/yulenegaleratrillas' } },
-  { id: 6, titulo: 'reel-06.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre ingresos y appointment setting, con motion graphics', duracion: '01:11', videoUrl: '/reels/reel-06.mp4', poster: '/reels/posters/reel-06.jpg' },
+  { id: 2, titulo: 'reel-02.mp4', tipo: 'Contenido educativo', desc: 'Talking head sobre cómo planificar 30 días de contenido, con motion graphics y calendario animado', duracion: '01:24', videoUrl: '/reels/reel-02.mp4', poster: '/reels/posters/reel-02.jpg', fecha: '2026-08-09' },
+  { id: 3, titulo: 'reel-03.mp4', tipo: 'Reel promocional', desc: 'Resultados de una promo con avalancha de pedidos, motion graphics y texto animado', duracion: '00:37', videoUrl: '/reels/reel-03.mp4', poster: '/reels/posters/reel-03.jpg', fecha: '2026-07-20' },
+  { id: 4, titulo: 'reel-04.mp4', tipo: 'Talking head', desc: 'Talking head sobre appointment setting, cortes ágiles y subtítulos', duracion: '00:52', videoUrl: '/reels/reel-04.mp4', poster: '/reels/posters/reel-04.jpg', fecha: '2026-07-13' },
 ]
+
+const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+
+function formatFecha(fechaStr) {
+  if (!fechaStr) return ''
+  const fecha = new Date(`${fechaStr}T00:00:00`)
+  const dias = Math.floor((Date.now() - fecha.getTime()) / 86400000)
+  if (dias < 1) return 'Hoy'
+  if (dias < 2) return 'Ayer'
+  if (dias < 14) return `Hace ${dias} días`
+  if (dias < 60) return `Hace ${Math.floor(dias / 7)} semanas`
+  return `${fecha.getDate()} ${MESES[fecha.getMonth()]}`
+}
 
 const YOUTUBE_VIDEOS = [
   { id: 1, titulo: 'She Doesn’t Want Equality. She Wants You To Lead.', canal: 'Flourish with Laurin', videoId: 'zwbJnXpkRHs', videoUrl: 'https://www.youtube.com/embed/zwbJnXpkRHs?autoplay=1', poster: 'https://i.ytimg.com/vi/zwbJnXpkRHs/hqdefault.jpg', externalUrl: 'https://www.youtube.com/watch?v=zwbJnXpkRHs' },
@@ -58,6 +68,13 @@ function ProyectoCard({ proyecto, i, blurFilter, onOpen }) {
           />
         </motion.div>
         <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors duration-200" />
+
+        {/* Fecha de subida */}
+        {proyecto.fecha && (
+          <div className="absolute top-2 left-2 h-6 px-2 rounded bg-black/55 backdrop-blur-sm flex items-center font-mono text-[10px] text-white">
+            {formatFecha(proyecto.fecha)}
+          </div>
+        )}
 
         {/* Play */}
         <div className="relative w-12 h-12 rounded-full bg-black/45 group-hover:bg-accent flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
@@ -152,9 +169,12 @@ function YoutubeCard({ video, i, blurFilter, onPlay }) {
 
 export default function Trabajos() {
   const [modalProyecto, setModalProyecto] = useState(null)
+  const [mostrarTodos, setMostrarTodos] = useState(false)
+  const proyectosVisibles = mostrarTodos ? PROYECTOS : PROYECTOS.slice(0, 3)
+  const hayMas = PROYECTOS.length > 3
   const pointerFine = usePointerFine()
   // Un solo listener de scroll para toda la sección — el blur se le pasa
-  // a cada card ya calculado, en vez de que cada una lo recalcule.
+  // a cada card ya calculado, en vej de que cada una lo recalcule.
   const blurFilter = useScrollBlur({ enabled: pointerFine })
 
   return (
@@ -186,10 +206,22 @@ export default function Trabajos() {
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROYECTOS.map((proyecto, i) => (
+          {proyectosVisibles.map((proyecto, i) => (
             <ProyectoCard key={proyecto.id} proyecto={proyecto} i={i} blurFilter={blurFilter} onOpen={setModalProyecto} />
           ))}
         </div>
+
+        {hayMas && (
+          <motion.div {...fadeUp(0.15)} className="flex justify-center mt-8">
+            <button
+              type="button"
+              onClick={() => setMostrarTodos((v) => !v)}
+              className="font-mono text-xs tracking-wide px-5 py-2.5 rounded-lg border border-[#3a3a3a] hover:border-accent text-base-ink transition-colors duration-200"
+            >
+              {mostrarTodos ? 'Ver menos' : `Ver más (+${PROYECTOS.length - 3})`}
+            </button>
+          </motion.div>
+        )}
 
         {/* Formato largo (YouTube) — separado y diferenciado del resto */}
         {YOUTUBE_VIDEOS.length > 0 && (
@@ -221,3 +253,4 @@ export default function Trabajos() {
     </section>
   )
 }
+
