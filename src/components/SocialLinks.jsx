@@ -1,6 +1,16 @@
 export const SOCIALS = {
+  x: 'https://x.com/EditorSantiagoo',
   instagram: 'https://instagram.com/santiferlatti',
   tiktok: 'https://www.tiktok.com/@santiferlatti',
+}
+
+function XIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+      <line x1="5.5" y1="5.5" x2="18.5" y2="18.5" />
+      <line x1="18.5" y1="5.5" x2="5.5" y2="18.5" />
+    </svg>
+  )
 }
 
 function InstagramIcon() {
@@ -28,6 +38,9 @@ export default function SocialLinks({ className = '', iconClassName = '' }) {
   const base = `inline-flex items-center justify-center w-10 h-10 rounded-lg border border-base-border text-base-muted hover:text-accent hover:border-accent focus:text-accent focus:border-accent focus:outline-none transition-colors duration-200 ${iconClassName}`
   return (
     <div className={`flex items-center gap-3 ${className}`}>
+      <a href={SOCIALS.x} target="_blank" rel="noopener noreferrer" aria-label="X de Santiago Ferlatti" className={base}>
+        <XIcon />
+      </a>
       <a href={SOCIALS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram de Santiago Ferlatti" className={base}>
         <InstagramIcon />
       </a>

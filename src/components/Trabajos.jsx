@@ -92,7 +92,7 @@ function ProyectoCard({ proyecto, i, blurFilter, onOpen }) {
 
       {/* Barra inferior estilo Premiere */}
       <div className="bg-[#1e1e1e] py-2 px-3 flex items-center justify-between flex-shrink-0">
-        <span className="font-mono text-xs text-white">{proyecto.titulo}</span>
+        <span className="font-mono text-xs text-white">{proyecto.tipo}</span>
         <span className="font-mono text-xs" style={{ color: '#8a8a8a' }}>{proyecto.duracion || '▶'}</span>
       </div>
     </motion.div>
@@ -251,7 +251,7 @@ export default function Trabajos() {
 
       <VideoModal
         videoUrl={modalProyecto?.videoUrl || ''}
-        titulo={modalProyecto?.titulo || ''}
+        titulo={modalProyecto?.tipo || ''}
         aspect={modalProyecto?.videoId ? '16/9' : '9/16'}
         externalUrl={modalProyecto?.externalUrl}
         isOpen={!!modalProyecto}

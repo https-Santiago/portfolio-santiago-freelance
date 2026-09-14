@@ -73,7 +73,7 @@ export default function Hero() {
           {...fadeUp(0.2)}
           className="text-base-muted leading-relaxed text-center text-base mt-2 max-w-md"
         >
-          Llevo 6 meses editando video y ya trabajé con más de 20 clientes. Me enfoco en los detalles —color, audio, ritmo— para que cada proyecto salga lo mejor posible. Trabajo con Premiere, After Effects y Photoshop.
+          Trabajé con más de 20 creadores y marcas editando contenido para YouTube, Instagram y TikTok. Me enfoco en los detalles —ritmo, color, audio— para que el video retenga hasta el final. Premiere, After Effects y Photoshop.
         </motion.p>
 
         <motion.a
@@ -91,7 +91,7 @@ export default function Hero() {
 
         <motion.div {...fadeUp(0.4)} className="flex gap-10 mt-8">
           {[
-            { value: '+20', label: 'clientes en 6 meses' },
+            { value: '+20', label: 'clientes' },
             { value: '-24hs', label: 'tiempo de respuesta' },
           ].map(({ value, label }) => (
             <div key={label} className="flex flex-col gap-0.5 text-center">
@@ -181,7 +181,7 @@ export default function Hero() {
 
           <motion.div {...fadeUp(0.4)} className="flex gap-8">
             {[
-              { value: '+20', label: 'clientes en 6 meses' },
+              { value: '+20', label: 'clientes' },
               { value: '-24hs', label: 'tiempo de respuesta' },
             ].map(({ value, label }) => (
               <div key={label} className="flex flex-col gap-0.5">
@@ -216,7 +216,7 @@ export default function Hero() {
               textShadow: '0 2px 20px rgba(30,30,30,0.8)',
             }}
           >
-            Llevo 6 meses editando video y ya trabajé con más de 20 clientes. Me enfoco en los detalles —color, audio, ritmo— para que cada proyecto salga lo mejor posible. Trabajo con Premiere, After Effects y Photoshop.
+            Trabajé con más de 20 creadores y marcas editando contenido para YouTube, Instagram y TikTok. Me enfoco en los detalles —ritmo, color, audio— para que el video retenga hasta el final. Premiere, After Effects y Photoshop.
           </p>
         </div>
       </motion.div>

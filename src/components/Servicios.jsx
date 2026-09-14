@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import SocialLinks from './SocialLinks'
 
+const EMAIL = 'santiagoferlatti9@gmail.com'
+const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent('Consulta por edición de video')}`
+
 const WA_NUMBER = '5493464692656'
 const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre el servicio de edición de video.')}`
 const WA_LINK_LARGO = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Santiago! Quiero consultarte sobre edición de un video largo (YouTube).')}`
@@ -49,7 +52,8 @@ const HIGHLIGHTS = [
 const METADATA = [
   { label: 'ESTADO',       valor: 'Disponible para nuevos proyectos' },
   { label: 'RESPUESTA',    valor: 'Menos de 24hs' },
-  { label: 'UBICACIÓN',    valor: 'Rosario, Argentina (remoto)' },
+  { label: 'EMAIL',        valor: EMAIL },
+  { label: 'UBICACIÓN',    valor: 'Remoto · España y LATAM' },
   { label: 'HERRAMIENTAS', valor: 'Premiere · After Effects · Photoshop' },
 ]
 
@@ -158,15 +162,14 @@ function EdicionCard() {
           {/* Precio */}
           <div className="min-w-0">
             <p className="font-mono tracking-widest mb-1.5" style={{ fontSize: 10, color: '#b0b0b0' }}>
-              PRECIO · VIDEO DE ~1 MIN
+              PRESUPUESTO · FORMATO CORTO
             </p>
             <div className="flex items-baseline gap-2 leading-none">
-              <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>
-                $30
+              <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(1.6rem, 7vw, 2.3rem)', lineHeight: 1 }}>
+                A medida
               </span>
-              <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>USD</span>
             </div>
-            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>≈ $46.000 ARS</p>
+            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>Según volumen mensual</p>
           </div>
 
           {/* Incluye */}
@@ -177,7 +180,8 @@ function EdicionCard() {
             <p className="font-mono leading-relaxed" style={{ fontSize: 10, color: '#b0b0b0' }}>
               Video + color<br />
               Audio + música<br />
-              Subtítulos
+              Subtítulos<br />
+              2 rondas de correcciones
             </p>
           </div>
         </div>
@@ -282,15 +286,14 @@ function EdicionLargaCard() {
           {/* Precio */}
           <div className="min-w-0">
             <p className="font-mono tracking-widest mb-1.5" style={{ fontSize: 10, color: '#b0b0b0' }}>
-              PRECIO · POR MINUTO
+              PRESUPUESTO · FORMATO LARGO
             </p>
             <div className="flex items-baseline gap-2 leading-none">
-              <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(2rem, 9vw, 2.75rem)', lineHeight: 1 }}>
-                $15
+              <span className="font-mono font-bold text-white" style={{ fontSize: 'clamp(1.6rem, 7vw, 2.3rem)', lineHeight: 1 }}>
+                Por episodio
               </span>
-              <span className="font-mono text-sm" style={{ color: '#b0b0b0' }}>USD/min</span>
             </div>
-            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>Ej: video de 30 min ≈ $450 USD</p>
+            <p className="font-mono text-xs mt-1" style={{ color: '#9a9a9a' }}>No por minuto: el precio no cambia con la duración</p>
           </div>
 
           {/* Incluye */}
@@ -301,7 +304,8 @@ function EdicionLargaCard() {
             <p className="font-mono leading-relaxed" style={{ fontSize: 10, color: '#b0b0b0' }}>
               Video + color<br />
               Audio + música<br />
-              Subtítulos
+              Subtítulos<br />
+              2 rondas de correcciones
             </p>
           </div>
         </div>
@@ -548,9 +552,17 @@ export default function Servicios() {
               <div className="mt-auto pt-6" style={{ borderTop: '1px solid #3a3a3a' }}>
                 <ContactoForm />
 
-                <div className="mt-4 flex items-center justify-center gap-3">
-                  <span className="font-mono text-[11px]" style={{ color: '#8a8a8a' }}>También en redes</span>
-                  <SocialLinks iconClassName="w-9 h-9" />
+                <div className="mt-4 flex flex-col items-center gap-3">
+                  <a
+                    href={MAILTO}
+                    className="font-mono text-[12px] text-base-muted hover:text-accent focus:text-accent focus:outline-none transition-colors duration-200 underline underline-offset-4 decoration-[#3a3a3a] hover:decoration-current"
+                  >
+                    o escribime a {EMAIL}
+                  </a>
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="font-mono text-[11px]" style={{ color: '#8a8a8a' }}>También en redes</span>
+                    <SocialLinks iconClassName="w-9 h-9" />
+                  </div>
                 </div>
               </div>
             </div>

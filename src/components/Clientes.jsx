@@ -7,15 +7,29 @@ import { usePointerFine } from '../hooks/usePointerFine'
 const CLIENTES = [
   {
     id: 1,
+    plataforma: 'youtube',
+    handle: 'FlourishwithLaurin',
+    subtitulo: 'Flourish with Laurin',
+    categoria: 'Relationship & Life Coach',
+    stats: [
+      { valor: '531 mil', label: 'suscriptores' },
+    ],
+    bio: [
+      '🔥 Raw Truth. Real Growth. No Apologies.',
+      '🎥 Contenido semanal sobre relaciones y crecimiento personal',
+      'Mirá los videos completos ⬇️',
+    ],
+    link: 'bio.site/FlourishwithLaurin',
+    url: 'https://www.youtube.com/@FlourishwithLaurin/videos',
+    foto: '/clientes/laurin.png',
+  },
+  {
+    id: 2,
     plataforma: 'instagram',
     handle: 'karly.baptista',
     subtitulo: 'K A R L Y  |  Nutrición | Mentalidad',
     categoria: 'Sports & Fitness Instruction',
-    stats: [
-      { valor: '690', label: 'publicaciones' },
-      { valor: '7061', label: 'seguidores' },
-      { valor: '1300', label: 'seguidos' },
-    ],
+    stats: [],
     bio: [
       '🚩Ayudo a mujeres +40 a que se les caigan los patalones en 21 días',
       '💚+300 mujeres transformaron su metabolismo',
@@ -26,15 +40,13 @@ const CLIENTES = [
     foto: '/clientes/karly.png',
   },
   {
-    id: 2,
+    id: 3,
     plataforma: 'instagram',
     handle: 'yulenegaleratrillas',
     subtitulo: 'Yulene Galera',
     categoria: 'Motivational speaker',
     stats: [
-      { valor: '785', label: 'publicaciones' },
       { valor: '121 mil', label: 'seguidores' },
-      { valor: '2432', label: 'seguidos' },
     ],
     bio: [
       'Te guío a encontrar la fuerza de tu voz y así cambiar tu vida',
@@ -47,15 +59,13 @@ const CLIENTES = [
     foto: '/clientes/yulene.png',
   },
   {
-    id: 3,
+    id: 4,
     plataforma: 'instagram',
     handle: 'seba.spinassi',
     subtitulo: 'Sebastian Spinassi',
     categoria: 'Entrepreneur',
     stats: [
-      { valor: '7', label: 'publicaciones' },
       { valor: '34,1 mil', label: 'seguidores' },
-      { valor: '891', label: 'seguidos' },
     ],
     bio: [
       '📌MAYORISTA DE PERFUMES',
@@ -66,25 +76,6 @@ const CLIENTES = [
     link: 'luruxperfumes.com',
     url: 'https://www.instagram.com/seba.spinassi',
     foto: '/clientes/sebastian.png',
-  },
-  {
-    id: 4,
-    plataforma: 'youtube',
-    handle: 'FlourishwithLaurin',
-    subtitulo: 'Flourish with Laurin',
-    categoria: 'Relationship & Life Coach',
-    stats: [
-      { valor: '531 mil', label: 'suscriptores' },
-      { valor: '1 mil', label: 'videos' },
-    ],
-    bio: [
-      '🔥 Raw Truth. Real Growth. No Apologies.',
-      '🎥 Contenido semanal sobre relaciones y crecimiento personal',
-      'Mirá los videos completos ⬇️',
-    ],
-    link: 'bio.site/FlourishwithLaurin',
-    url: 'https://www.youtube.com/@FlourishwithLaurin/videos',
-    foto: '/clientes/laurin.png',
   },
 ]
 

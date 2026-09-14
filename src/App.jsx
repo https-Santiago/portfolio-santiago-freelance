@@ -23,10 +23,10 @@ export default function App() {
       <LayersSidebar />
       <div className="pt-[104px] md:pt-10 pb-7">
         <Hero />
+        <Clientes />
         <Trabajos />
         <Testimonios />
         <SectionDivider />
-        <Clientes />
         <Servicios />
         <FAQ />
       </div>

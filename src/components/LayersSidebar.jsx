@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const LAYERS = [
   { id: 'hero',        name: 'Hero.psd' },
+  { id: 'clientes',    name: 'Clientes.psd' },
   { id: 'trabajos',    name: 'Trabajos.psd' },
   { id: 'testimonios', name: 'Testimonios.psd' },
   { id: 'servicios',   name: 'Servicios.psd' },

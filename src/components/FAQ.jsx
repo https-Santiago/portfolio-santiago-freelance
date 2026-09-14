@@ -21,7 +21,7 @@ const FAQS = [
   },
   {
     q: '¿Qué incluye el precio?',
-    a: 'Edición completa: armado, corrección de color, mejora de audio, música y subtítulos, por $30 USD (≈ $46.000 ARS) por video de hasta 1 minuto. Para videos largos (formato YouTube, podcasts, charlas) el precio es $15 USD por minuto de video final. Extras como guion previo, motion graphics o multi-formato los charlamos aparte.',
+    a: 'Edición completa: armado, corrección de color, mejora de audio, música, subtítulos y dos rondas de correcciones. Para formato largo (YouTube, podcasts, charlas) cotizo por episodio y no por minuto, así que el precio no cambia si el video queda más corto. El presupuesto depende del formato y del volumen mensual: contame qué necesitás y te paso un número concreto. Extras como guion previo, motion graphics o multi-formato los charlamos aparte.',
   },
   {
     q: '¿Cómo te mando el material?',

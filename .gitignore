@@ -8,3 +8,6 @@ dist
 # Videos crudos sin comprimir, no van al repo (pesan demasiado para GitHub)
 Videos Frelance/
 foto-perfil/
+
+# Entorno de Python (herramienta de clips)
+.venv/
