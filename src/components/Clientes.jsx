@@ -77,6 +77,42 @@ const CLIENTES = [
     url: 'https://www.instagram.com/seba.spinassi',
     foto: '/clientes/sebastian.png',
   },
+  {
+    id: 5,
+    plataforma: 'instagram',
+    handle: 'javieriniesta_essence',
+    subtitulo: 'Javi Iniesta',
+    categoria: 'Educación',
+    stats: [
+      { valor: '679', label: 'seguidores' },
+    ],
+    bio: [
+      '→ Duplica tu tasa de cierre en 90 días',
+      '→ Formé closers que hoy tienen su propia marca',
+      '→ +7 años en High Ticket',
+    ],
+    link: 'instagram.com/javieriniesta_essence',
+    url: 'https://www.instagram.com/javieriniesta_essence',
+    foto: '/clientes/javi.png',
+  },
+  {
+    id: 6,
+    plataforma: 'instagram',
+    handle: 'fanny.vanlaere',
+    subtitulo: 'Fanny | Respiración y Sistema Nervioso',
+    categoria: 'Educación',
+    stats: [
+      { valor: '55,5 mil', label: 'seguidores' },
+    ],
+    bio: [
+      '🫁 Tu respiración controla tu sistema nervioso y tu vida.',
+      '😴 Mejor sueño, más energía y menos estrés.',
+      '🌍 Método Van',
+    ],
+    link: 'instagram.com/fanny.vanlaere',
+    url: 'https://www.instagram.com/fanny.vanlaere',
+    foto: '/clientes/fanny.png',
+  },
 ]
 
 const EASE = [0.16, 1, 0.3, 1]
